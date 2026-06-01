@@ -1,0 +1,32 @@
+{
+  "faqSection": {
+    "title": "Frequently Asked Questions",
+    "description": "Get all the answers you need about HOH 8.0.",
+    "faqs": [
+      {
+        "question": "What exactly is HOH 8.0 - The Age of Autonomous Agents?",
+        "answer": "It is not just a hackathon—it is an epic fusion of creativity, caffeine, and code! Think of it as a 48-hour sprint where brilliant minds come together to solve real problems, build cool stuff, and maybe win some brag-worthy prizes"
+      },
+      {
+        "question": "Who can participate?",
+        "answer": "Whether you're a coding ninja, a design wizard, or just someone with crazy ideas—everyone is welcome! Students, beginners, pros… if you have got the passion, you have got a spot here."
+      },
+      {
+        "question": "How do I register?",
+        "answer": "Just click that big, shiny “Register Now” button on our website, fill in your details, and boom—you are in! Do not wait too long though; spots fill up fast!"
+      },
+      {
+        "question": "What if I do not have a team?",
+        "answer": "No worries! We have got a team formation session before the hackathon kicks off. So, you will find your crew and maybe your next best friends."
+      },
+      {
+        "question": "Can I participate solo?",
+        "answer": "Yes, but we encourage teams (2-4 members). We will help you find teammates if needed!"
+      },
+      {
+        "question": "Is there a registration fee?",
+        "answer": "No, HOH 8.0 is completely free! Just register and you are in."
+      }
+    ]
+  }
+}

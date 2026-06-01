@@ -7,6 +7,8 @@ import Timeline from "./components/Timeline";
 import PrizePool from "./components/PrizePool";
 import ScrollStack, { ScrollStackItem } from "./components/ScrollStack";
 import sponsorsData from "./data/sponsors.json";
+import Accordion, { AccordionItem, AccordionTrigger, AccordionPanel } from "./components/SimpleAccordion";
+import faqData from "./data/faq.json";
 
 function App() {
   const infoCards = [
@@ -113,7 +115,28 @@ function App() {
 
         <section className="flex min-h-screen snap-start snap-always items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
           <div className="mx-auto w-full max-w-[1400px]">
-            <ScrollStack className="h-screen no-scrollbar" itemDistance={60} itemStackDistance={5} stackPosition="15%" baseScale={0.75} blurAmount={1}>
+            <ScrollStack
+              className="h-screen no-scrollbar"
+              itemDistance={60}
+              itemStackDistance={5}
+              stackPosition="15%"
+              baseScale={0.75}
+              blurAmount={1}
+              footer={
+                <div className="mx-auto w-full max-w-[1000px] text-white py-16">
+                  <h2 className="text-4xl font-bold mb-6">{faqData?.faqSection?.title ?? 'FAQ'}</h2>
+                  <p className="text-white/80 mb-8">{faqData?.faqSection?.description}</p>
+                  <Accordion>
+                    {(faqData?.faqSection?.faqs ?? []).map((f, i) => (
+                      <AccordionItem key={i} value={String(i)}>
+                        <AccordionTrigger>{f.question}</AccordionTrigger>
+                        <AccordionPanel>{f.answer}</AccordionPanel>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </div>
+              }
+            >
               {(() => {
                 const categories = sponsorsData?.sponsorsSection?.categories ?? [];
                 const items = [];

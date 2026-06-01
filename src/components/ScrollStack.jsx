@@ -15,6 +15,7 @@ export const ScrollStackItem = ({ children, itemClassName = '' }) => (
 
 const ScrollStack = ({
   children,
+  footer,
   className = '',
   itemDistance = 100,
   itemScale = 0.03,
@@ -35,6 +36,7 @@ const ScrollStack = ({
   const cardsRef = useRef([]);
   const lastTransformsRef = useRef(new Map());
   const isUpdatingRef = useRef(false);
+  const cardsWrapperRef = useRef(null);
 
   const calculateProgress = useCallback((scrollTop, start, end) => {
     if (scrollTop < start) return 0;
@@ -373,10 +375,59 @@ const ScrollStack = ({
 
   return (
     <div className={containerClassName} ref={scrollerRef} style={containerStyles}>
-      <div className="scroll-stack-inner pt-[20vh] px-20 pb-[50rem] min-h-screen">
-        {children}
-        {/* Spacer so the last pin can release cleanly */}
+      <style>{`
+        .scroll-stack-footer {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .scroll-stack-footer.is-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .scroll-stack-cards {
+          transition: opacity 0.6s ease;
+        }
+        .scroll-stack-cards.cards-fading {
+          opacity: 0;
+          pointer-events: none;
+        }
+      `}</style>
+      <div className="scroll-stack-inner pt-[20vh] px-20 pb-16 min-h-screen">
+        {/* Cards wrapper — fades out when FAQ reaches centre */}
+        <div className="scroll-stack-cards" ref={cardsWrapperRef}>
+          {children}
+        </div>
+        {/* Sentinel — marks where pinning ends */}
         <div className="scroll-stack-end w-full h-px" />
+        {/* Footer slot: fades in as it scrolls into the internal viewport */}
+        {footer && (
+          <div
+            className="scroll-stack-footer mt-8"
+            ref={el => {
+              if (!el) return;
+              const observer = new IntersectionObserver(
+                ([entry]) => {
+                  // Fade FAQ in once it peeks into view
+                  if (entry.isIntersecting) el.classList.add('is-visible');
+                  // Fade cards out when FAQ is centred (≥35% visible), back in when it leaves
+                  const wrapper = cardsWrapperRef.current;
+                  if (wrapper) {
+                    if (entry.intersectionRatio >= 0.35) {
+                      wrapper.classList.add('cards-fading');
+                    } else {
+                      wrapper.classList.remove('cards-fading');
+                    }
+                  }
+                },
+                { root: scrollerRef.current, threshold: [0.05, 0.35] }
+              );
+              observer.observe(el);
+            }}
+          >
+            {footer}
+          </div>
+        )}
       </div>
     </div>
   );
