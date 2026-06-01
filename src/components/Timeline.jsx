@@ -1,256 +1,136 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useState } from "react";
 import timelineData from "../data/timeline.json";
 
+const DAY_LABELS = ["FRIDAY", "SATURDAY", "SUNDAY"];
 
-
-function Timeline() {
-  const schedule = useMemo(() => (timelineData?.schedule || []).slice(0, 3), []);
-  const dayButtons = ["Day 1", "Day 2", "Day 3"];
-  const scrollRef = useRef(null);
-  const eventRefs = useRef([]);
-  const switchTimerRef = useRef(null);
-
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [leavingIndex, setLeavingIndex] = useState(null);
-  const [direction, setDirection] = useState(1);
-  const [activeEventIndex, setActiveEventIndex] = useState(0);
-
-  const activeDay = schedule[activeIndex] || { events: [] };
-  const leavingDay = leavingIndex === null ? null : schedule[leavingIndex];
-
-  const overflowTimeoutRef = useRef(null);
-
-  useEffect(() => {
-    const scroller = scrollRef.current;
-    if (!scroller) return;
-
-    scroller.scrollTop = 0;
-    setActiveEventIndex(0);
-
-    const handleWheel = (e) => {
-      const { scrollTop, scrollHeight, clientHeight } = scroller;
-      const isAtTop = scrollTop <= 0;
-      const isAtBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight - 1;
-
-      if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
-        // Disable overflow so the wheel event bubbles up naturally to main scroll
-        scroller.style.overflowY = 'hidden';
-        if (overflowTimeoutRef.current) clearTimeout(overflowTimeoutRef.current);
-        overflowTimeoutRef.current = setTimeout(() => {
-          scroller.style.overflowY = 'auto';
-        }, 400);
-      }
-    };
-
-    scroller.addEventListener('wheel', handleWheel, { passive: true });
-    return () => {
-      scroller.removeEventListener('wheel', handleWheel);
-      if (overflowTimeoutRef.current) clearTimeout(overflowTimeoutRef.current);
-    };
-  }, [activeIndex]);
-
-  useEffect(() => {
-    return () => {
-      if (switchTimerRef.current) clearTimeout(switchTimerRef.current);
-    };
-  }, []);
-
-  const updateActiveEvent = () => {
-    const scroller = scrollRef.current;
-    if (!scroller) return;
-
-    const viewport = scroller.getBoundingClientRect();
-    const viewportCenter = viewport.top + viewport.height / 2;
-    let nextIndex = 0;
-    let closestDistance = Number.POSITIVE_INFINITY;
-
-    eventRefs.current.forEach((node, index) => {
-      if (!node) return;
-      const rect = node.getBoundingClientRect();
-      const itemCenter = rect.top + rect.height / 2;
-      const distance = Math.abs(itemCenter - viewportCenter);
-
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        nextIndex = index;
-      }
-    });
-
-    setActiveEventIndex(nextIndex);
-  };
-
-  const handleDayChange = nextIndex => {
-    if (nextIndex === activeIndex) return;
-
-    if (switchTimerRef.current) clearTimeout(switchTimerRef.current);
-    setDirection(nextIndex > activeIndex ? 1 : -1);
-    setLeavingIndex(activeIndex);
-    setActiveIndex(nextIndex);
-
-    switchTimerRef.current = setTimeout(() => {
-      setLeavingIndex(null);
-    }, 520);
-  };
-
-  const renderEvents = (day, isLeaving = false) => (
+function EventRow({ event, isActive }) {
+  return (
     <div
-      ref={isLeaving ? null : scrollRef}
-      onScroll={isLeaving ? undefined : updateActiveEvent}
-      className={`timeline-scroll relative h-[58vh] overflow-y-auto pr-1 ${
-        isLeaving ? "pointer-events-none" : "scroll-smooth"
+      className={`flex gap-4 px-5 py-3 rounded-sm transition-colors duration-200 ${
+        isActive
+          ? "bg-white/5 border border-[#00e5ff]/30"
+          : "hover:bg-white/[0.03]"
       }`}
     >
-      <div className="relative space-y-8 pb-[22vh] pl-12 pt-[12vh] sm:pl-16">
+      {/* Time */}
+      <span
+        className="text-xs font-semibold shrink-0 mt-0.5 w-10 text-right"
+        style={{ color: "#00e5ff", fontVariantNumeric: "tabular-nums", letterSpacing: "0.04em" }}
+      >
+        {event.time?.split(" ")[0] ?? event.time}
+      </span>
 
-        {day.events.map((event, index) => {
-          const distance = Math.abs(index - activeEventIndex);
-          const isFocused = !isLeaving && distance === 0;
-          const isNearby = !isLeaving && distance === 1;
-
-          return (
-            <article
-              key={`${event.name}-${index}`}
-              ref={node => {
-                if (!isLeaving) eventRefs.current[index] = node;
-              }}
-              className={`group relative w-full max-w-4xl scroll-m-24 transition-all duration-500 ease-out ${
-                isFocused
-                  ? "scale-100 opacity-100"
-                  : isNearby
-                    ? "scale-95 opacity-100"
-                    : "scale-90 opacity-100"
-              } ${isLeaving ? "opacity-0" : ""}`}
-            >
-              <div
-                className={`absolute -left-10 top-3 h-4 w-4 rounded-full bg-gradient-to-br from-cyan-600 to-fuchsia-600 shadow-[0_0_15px_rgba(192,38,211,0.5)] transition-all duration-500 sm:-left-12 ${
-                  isFocused ? "scale-150" : "scale-75"
-                }`}
-              />
-              <div className="rounded-lg border border-black/10 bg-black/[0.03] px-5 py-4 backdrop-blur-sm">
-                <p className="text-sm font-semibold uppercase text-cyan-600/85">{event.time}</p>
-                <h3
-                  className={`mt-2 font-bold transition-all duration-500 ${
-                    isFocused ? "text-3xl text-black sm:text-4xl" : "text-xl text-black/80 sm:text-2xl"
-                  }`}
-                >
-                  {event.name}
-                </h3>
-                <p className="mt-2 text-base text-black/70">{event.location}</p>
-              </div>
-            </article>
-          );
-        })}
+      {/* Name + location */}
+      <div className="flex flex-col min-w-0">
+        <span className={`text-sm font-medium leading-snug ${isActive ? "text-white" : "text-white/85"}`}>
+          {isActive && <span className="mr-1.5 text-[#00e5ff] text-xs">&lt;/&gt;</span>}
+          {event.name}
+        </span>
+        {event.location && (
+          <span className="mt-0.5 flex items-center gap-1 text-[10px] text-white/30">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+              <circle cx="12" cy="9" r="2.5"/>
+            </svg>
+            {event.location}
+          </span>
+        )}
       </div>
     </div>
   );
+}
 
+function DayCard({ day, label, activeEventIndex }) {
   return (
-    <div className="mx-auto w-full max-w-[1400px] px-2 text-black">
-      <style>
-        {`
-          .timeline-scroll {
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-          }
-
-          .timeline-scroll::-webkit-scrollbar {
-            width: 0;
-            height: 0;
-            display: none;
-          }
-
-          .timeline-tab {
-            box-shadow: inset 0 0 24px rgba(255, 255, 255, 0.08), 0 0 28px rgba(56, 189, 248, 0.1);
-          }
-
-          .timeline-tab::before,
-          .timeline-tab::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 32px;
-            pointer-events: none;
-          }
-
-          .timeline-tab::before {
-            left: 0;
-            box-shadow: 12px 0 24px rgba(255, 255, 255, 0.14);
-          }
-
-          .timeline-tab::after {
-            right: 0;
-            box-shadow: -12px 0 24px rgba(255, 255, 255, 0.12);
-          }
-
-
-
-          @keyframes timeline-in-right {
-            from { opacity: 0; transform: translateX(72px); filter: blur(10px); }
-            to { opacity: 1; transform: translateX(0); filter: blur(0); }
-          }
-
-          @keyframes timeline-in-left {
-            from { opacity: 0; transform: translateX(-72px); filter: blur(10px); }
-            to { opacity: 1; transform: translateX(0); filter: blur(0); }
-          }
-
-          @keyframes timeline-out-left {
-            from { opacity: 1; transform: translateX(0); filter: blur(0); }
-            to { opacity: 0; transform: translateX(-72px); filter: blur(10px); }
-          }
-
-          @keyframes timeline-out-right {
-            from { opacity: 1; transform: translateX(0); filter: blur(0); }
-            to { opacity: 0; transform: translateX(72px); filter: blur(10px); }
-          }
-
-          .timeline-enter-right { animation: timeline-in-right 520ms ease both; }
-          .timeline-enter-left { animation: timeline-in-left 520ms ease both; }
-          .timeline-leave-left { animation: timeline-out-left 520ms ease both; }
-          .timeline-leave-right { animation: timeline-out-right 520ms ease both; }
-        `}
-      </style>
-
-      <h1 className="text-center text-4xl font-bold sm:text-5xl">Timeline</h1>
-
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-        {dayButtons.map((label, index) => {
-          const isActive = index === activeIndex;
-
-          return (
-            <button
-              key={label}
-              type="button"
-              onClick={() => handleDayChange(index)}
-              className={`timeline-tab relative overflow-hidden rounded-md border px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] backdrop-blur-md transition duration-300 sm:text-base ${
-                isActive
-                  ? "border-cyan-500/60 bg-black/10 text-black"
-                  : "border-black/20 bg-black/[0.08] text-black/75 hover:border-fuchsia-500/50 hover:bg-black/[0.14] hover:text-black"
-              }`}
-            >
-              <span className="relative z-10">{label}</span>
-            </button>
-          );
-        })}
+    <div
+      className="flex flex-col rounded-sm overflow-hidden"
+      style={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.07)" }}
+    >
+      {/* Card header */}
+      <div className="flex items-center justify-between px-5 pt-5 pb-3">
+        <h3 className="text-2xl font-bold text-white tracking-tight">
+          {day.day.charAt(0).toUpperCase() + day.day.slice(1).toLowerCase()}
+        </h3>
+        <span className="border border-white/20 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-white/50">
+          {label}
+        </span>
       </div>
 
-      <div className="relative mt-10 min-h-[58vh] overflow-hidden">
-        {leavingDay && (
-          <div
-            className={`absolute inset-0 ${
-              direction > 0 ? "timeline-leave-left" : "timeline-leave-right"
-            }`}
-          >
-            {renderEvents(leavingDay, true)}
-          </div>
-        )}
-        <div
-          key={activeIndex}
-          className={leavingDay ? (direction > 0 ? "timeline-enter-right" : "timeline-enter-left") : ""}
+      {/* Separator */}
+      <div className="mx-5 mb-4 h-px bg-white/10" />
+
+      {/* Events */}
+      <div className="flex flex-col gap-0.5 pb-5">
+        {day.events.map((event, i) => (
+          <EventRow key={i} event={event} isActive={i === activeEventIndex} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Timeline() {
+  const schedule = timelineData?.schedule || [];
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Pick a "current" event to highlight per day (e.g. index 1 on day 1)
+  const activeEventIndex = 1;
+
+  return (
+    <div className="mx-auto w-full max-w-[1400px] px-4 py-16">
+      {/* Header */}
+      <div className="text-center mb-14">
+        <h2
+          className="text-4xl sm:text-5xl font-bold mb-4"
+          style={{ color: "#00e5ff" }}
         >
-          {renderEvents(activeDay)}
+          Timeline
+        </h2>
+        <p className="text-sm text-white/35 max-w-sm mx-auto leading-relaxed">
+          The synchronized schedule for autonomous agents and human developers.
+          Strict adherence to chronological execution is advised.
+        </p>
+      </div>
+
+      {/* Desktop: 3 columns */}
+      <div className="hidden md:grid md:grid-cols-3 gap-6">
+        {schedule.map((day, di) => (
+          <DayCard
+            key={di}
+            day={day}
+            label={DAY_LABELS[di] ?? `DAY ${di}`}
+            activeEventIndex={di === 1 ? activeEventIndex : -1}
+          />
+        ))}
+      </div>
+
+      {/* Mobile: tab selector + single card */}
+      <div className="md:hidden flex flex-col gap-4">
+        {/* Day tabs */}
+        <div className="flex gap-2 justify-center">
+          {schedule.map((day, di) => (
+            <button
+              key={di}
+              type="button"
+              onClick={() => setActiveIndex(di)}
+              className="px-4 py-1.5 text-xs font-semibold uppercase tracking-widest border transition-all duration-200"
+              style={
+                activeIndex === di
+                  ? { background: "#00e5ff", color: "#000", borderColor: "#00e5ff" }
+                  : { background: "transparent", color: "rgba(255,255,255,0.5)", borderColor: "rgba(255,255,255,0.15)" }
+              }
+            >
+              {day.day}
+            </button>
+          ))}
         </div>
+
+        {/* Active day card */}
+        <DayCard
+          day={schedule[activeIndex]}
+          label={DAY_LABELS[activeIndex] ?? `DAY ${activeIndex}`}
+          activeEventIndex={activeIndex === 1 ? activeEventIndex : -1}
+        />
       </div>
     </div>
   );

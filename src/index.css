@@ -1,11 +1,39 @@
 @import "tailwindcss";
 
+/* Space Grotesk font */
+@font-face {
+  font-family: 'SpaceGrotesk';
+  src: url('./assets/fonts/SpaceGrotesk-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'SpaceGrotesk';
+  src: url('./assets/fonts/SpaceGrotesk-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'SpaceGrotesk';
+  src: url('./assets/fonts/SpaceGrotesk-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'SpaceGrotesk';
+  src: url('./assets/fonts/SpaceGrotesk-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'SpaceGrotesk';
+  src: url('./assets/fonts/SpaceGrotesk-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
 html,
 body,
 #root {
   min-height: 100%;
   overflow-x: hidden;
   max-width: 100vw;
+  font-family: 'SpaceGrotesk', sans-serif;
 }
 
 html {
@@ -14,12 +42,13 @@ html {
 }
 
 body {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #0a0a0a;
+  color: #ffffff;
   -ms-overflow-style: none;
   scrollbar-width: none;
   overflow-x: hidden;
   max-width: 100vw;
+  font-family: 'SpaceGrotesk', sans-serif;
 }
 
 html::-webkit-scrollbar,
@@ -29,18 +58,43 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-.snap-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+/* Subtle dot grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.snap-container::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  display: none;
+/* Fade-in on scroll */
+[data-fade] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+[data-fade].visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* utility to hide scrollbars on internal scrollers */
+/* Staggered card load animation */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card-animate-in {
+  opacity: 0;
+  animation: fadeSlideUp 0.45s ease forwards;
+}
+.text-animate-in {
+  opacity: 0;
+  animation: fadeSlideUp 0.45s ease forwards;
+}
+
+/* utility to hide scrollbars */
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

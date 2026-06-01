@@ -159,7 +159,7 @@ const SpecialAwards = () => {
   const awards = prizeData?.prizePool?.specialAwards ?? [];
 
   return (
-    <section className="flex min-h-screen items-center justify-center px-4 pb-12 pt-28 sm:px-6 lg:px-10">
+    <section data-fade className="flex min-h-screen items-center justify-center px-4 pb-12 pt-28 sm:px-6 lg:px-10">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-10">
         
         {/* Header Block */}
