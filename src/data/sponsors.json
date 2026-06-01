@@ -1,0 +1,68 @@
+{
+  "sponsorsSection": {
+    "title": "Our Sponsors",
+    "description": "HOH is made possible by the generous support of our sponsors",
+    "categories": [
+      {
+        "tier": "Title Sponsor",
+        "sponsors": [
+          {
+            "name": "algoquant",
+            "logo": "/sponsors/algoquant.jpg",
+            "image": "/sponsors/images/algoquantimg.webp"
+          }
+        ]
+      },
+      {
+        "tier": "Gold Sponsors",
+        "sponsors": [
+          {
+            "name": "github",
+            "logo": "/sponsors/github.svg",
+            "image": "/sponsors/images/githubimg.webp"
+          }
+        ]
+      },
+      {
+        "tier": "Silver Sponsors",
+        "sponsors": [
+          {
+            "name": "devfolio",
+            "logo": "/sponsors/devfolio.svg",
+            "image": "/sponsors/images/devfolioimg.webp"
+          },
+          {
+            "name": "ETHIndia",
+            "logo": "/sponsors/ETHIndia.png",
+            "image": "/sponsors/images/ETHIndiaimg.webp"
+          },
+          {
+            "name": "APTOS",
+            "logo": "/sponsors/aptos.png",
+            "image": "/sponsors/images/aptosimg.webp"
+          }
+        ]
+      },
+      {
+        "tier": "Bronze Sponsors",
+        "sponsors": [
+          {
+            "name": "Endless Domains",
+            "logo": "/sponsors/endlessdomains_logo.jpg",
+            "image": "/sponsors/images/endlessdomainsimg.svg"
+          }
+        ]
+      },
+      {
+        "tier": "Community Partner",
+        "sponsors": [
+          {
+            "name": "theDevArmy",
+            "logo": "/sponsors/thedevarmy.png",
+            "image": "/sponsors/images/thedevarmyimg.png"
+          }
+        ]
+      }
+    ]
+  }
+}

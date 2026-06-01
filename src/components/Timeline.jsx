@@ -1,70 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import timelineData from "../data/timeline.json";
 
-/**
- * Draws the vertical timeline rail as an SVG with variable stroke width.
- * The stroke is thickest at the position of the active (focused) dot and
- * tapers to a thin line at both ends, so the thickness always tracks the
- * currently-centered event rather than changing randomly.
- */
-function TimelineRail({ totalEvents, activeEventIndex }) {
-  const N = Math.max(totalEvents, 1);
-  const SAMPLES = 120;
-  const MIN_W = 1;
-  const MAX_W = 4;
-  const SIGMA = 0.18;
-
-  // activeFrac: 0 = top, 1 = bottom
-  const activeFrac = activeEventIndex >= 0 ? activeEventIndex / Math.max(N - 1, 1) : 0.5;
-
-  // viewBox is "0 0 12 100" — y runs from 0 to 100 (user units)
-  // The polygon is centered at x=6, width varies with Gaussian peak at activeFrac
-  const pts = Array.from({ length: SAMPLES }, (_, i) => {
-    const frac = i / (SAMPLES - 1);
-    const dist = Math.abs(frac - activeFrac);
-    const t = Math.exp(-(dist * dist) / (2 * SIGMA * SIGMA));
-    const w = MIN_W + (MAX_W - MIN_W) * t;
-    const y = frac * 100;
-    return { y, w };
-  });
-
-  // Left edge going top→bottom, right edge going bottom→top
-  const leftPts  = pts.map(({ y, w }) => `${(6 - w / 2).toFixed(3)},${y.toFixed(3)}`).join(" ");
-  const rightPts = [...pts].reverse().map(({ y, w }) => `${(6 + w / 2).toFixed(3)},${y.toFixed(3)}`).join(" ");
-
-  return (
-    <svg
-      className="timeline-rail-svg"
-      viewBox="0 0 12 100"
-      preserveAspectRatio="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ left: "8px", width: "12px", height: "100%", position: "absolute", top: 0, bottom: 0, pointerEvents: "none", overflow: "visible" }}
-    >
-      <defs>
-        {/* gradientUnits="userSpaceOnUse" so y1/y2 map to our viewBox coords */}
-        <linearGradient id="railGrad" x1="0" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse">
-          <stop offset="0%"   stopColor="rgba(34,211,238,0.15)" />
-          <stop offset="30%"  stopColor="rgba(34,211,238,0.95)" />
-          <stop offset="70%"  stopColor="rgba(217,70,239,0.95)" />
-          <stop offset="100%" stopColor="rgba(34,211,238,0.15)" />
-        </linearGradient>
-        <filter id="railGlow" x="-400%" y="-5%" width="900%" height="110%">
-          <feGaussianBlur stdDeviation="0.8" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-      <polygon
-        points={`${leftPts} ${rightPts}`}
-        fill="url(#railGrad)"
-        filter="url(#railGlow)"
-        style={{ transition: "points 500ms ease-out" }}
-      />
-    </svg>
-  );
-}
 
 
 function Timeline() {
@@ -142,10 +78,7 @@ function Timeline() {
       }`}
     >
       <div className="relative space-y-8 pb-[22vh] pl-12 pt-[12vh] sm:pl-16">
-        <TimelineRail
-          totalEvents={day.events.length}
-          activeEventIndex={isLeaving ? -1 : activeEventIndex}
-        />
+
         {day.events.map((event, index) => {
           const distance = Math.abs(index - activeEventIndex);
           const isFocused = !isLeaving && distance === 0;

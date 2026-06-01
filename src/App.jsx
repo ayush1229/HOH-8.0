@@ -5,6 +5,8 @@ import TextType from "./components/TypeText";
 import MagicBento from "./components/MagicBento";
 import Timeline from "./components/Timeline";
 import PrizePool from "./components/PrizePool";
+import ScrollStack, { ScrollStackItem } from "./components/ScrollStack";
+import sponsorsData from "./data/sponsors.json";
 
 function App() {
   const infoCards = [
@@ -108,6 +110,45 @@ function App() {
           <Timeline />
         </section>
         <PrizePool />
+
+        <section className="flex min-h-screen snap-start snap-always items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
+          <div className="mx-auto w-full max-w-[1400px]">
+            <ScrollStack className="h-screen no-scrollbar" itemDistance={60} itemStackDistance={5} stackPosition="15%" baseScale={0.75} blurAmount={1}>
+              {(() => {
+                const categories = sponsorsData?.sponsorsSection?.categories ?? [];
+                const items = [];
+                categories.forEach((cat, idx) => {
+                  // Tier title card (purple)
+                  items.push(
+                    <ScrollStackItem
+                      key={`tier-${idx}`}
+                      itemClassName="flex items-center justify-center bg-purple-700 text-white"
+                    >
+                      <h2 className="text-4xl font-bold">{cat.tier}</h2>
+                    </ScrollStackItem>
+                  );
+
+                  // One card per sponsor image, centered, blue gradient background, glow on hover
+                  (cat.sponsors || []).forEach((s, sidx) => {
+                    items.push(
+                      <ScrollStackItem
+                        key={`s-${idx}-${sidx}`}
+                        itemClassName="flex items-center justify-center bg-gradient-to-r from-blue-500 to-blue-700"
+                      >
+                        <div className="flex items-center justify-center w-full h-full">
+                          <div className="p-4 rounded-lg transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.6)]">
+                            <img src={s.image || s.logo} alt={s.name} className="max-h-56 object-contain mx-auto" />
+                          </div>
+                        </div>
+                      </ScrollStackItem>
+                    );
+                  });
+                });
+                return items;
+              })()}
+            </ScrollStack>
+          </div>
+        </section>
       </main>
     </div>
   );

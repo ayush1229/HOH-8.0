@@ -35,3 +35,14 @@ body::-webkit-scrollbar {
   height: 0;
   display: none;
 }
+
+/* utility to hide scrollbars on internal scrollers */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}

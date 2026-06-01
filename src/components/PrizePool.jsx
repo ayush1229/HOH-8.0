@@ -1,17 +1,63 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CardSwap, { Card } from './CardSwap';
 import prizeData from '../data/prizepool.json';
+import LogoLoop from './LogoLoop';
+import sponsorsData from '../data/sponsors.json';
 
 const PrizePool = () => {
   const mainPrizes = prizeData?.prizePool?.mainPrizes ?? [];
   const total = prizeData?.prizePool?.totalAmount ?? '';
+  const amountRef = useRef(null);
+  const [logoWidth, setLogoWidth] = useState('100%');
+
+  useEffect(() => {
+    const update = () => {
+      const w = amountRef.current?.offsetWidth;
+      if (w) setLogoWidth(`${w}px`);
+    };
+
+    update();
+
+    let ro;
+    if (window.ResizeObserver && amountRef.current) {
+      ro = new ResizeObserver(update);
+      ro.observe(amountRef.current);
+    }
+    window.addEventListener('resize', update);
+    return () => {
+      ro?.disconnect();
+      window.removeEventListener('resize', update);
+    };
+  }, []);
 
   return (
     <section className="flex min-h-screen snap-start snap-always items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
       <div className="mx-auto flex w-full max-w-[1400px] items-center">
         <div className="w-1/3 pr-8 text-left text-white">
-          <h2 className="text-2xl font-bold">PRIZE POOL</h2>
-          <h1 className="mt-4 text-4xl font-extrabold">{total}</h1>
+          <h2 className="text-6xl sm:text-7xl font-bold">PRIZE POOL</h2>
+          <h1 ref={amountRef} className="mt-6 text-8xl sm:text-9xl font-extrabold leading-tight whitespace-nowrap inline-block">{total}</h1>
+
+          <div className="mt-8">
+            {(() => {
+              const categories = sponsorsData?.sponsorsSection?.categories ?? [];
+              const logos = categories.flatMap(cat => (cat.sponsors ?? []).map(s => ({ src: s.logo, alt: s.name })));
+              return (
+                <div style={{ height: 120, position: 'relative', overflow: 'hidden', width: logoWidth }}>
+                  <LogoLoop
+                    logos={logos}
+                    speed={100}
+                    direction="left"
+                    logoHeight={64}
+                    gap={48}
+                    hoverSpeed={20}
+                    scaleOnHover
+                    ariaLabel="Sponsors"
+                    width={logoWidth}
+                  />
+                </div>
+              );
+            })()}
+          </div>
         </div>
 
         <div className="relative w-2/3 h-[520px]">
