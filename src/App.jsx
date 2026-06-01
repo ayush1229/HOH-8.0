@@ -45,8 +45,12 @@ function App() {
 
             {/* Main heading via TextType */}
             <TextType
+              text={[
+                "The Age of Autonomous Agents",
+                "The Future of Decentralized Intelligence",
+                "Build Beyond Boundaries"
+              ]}
               className="text-3xl font-bold leading-snug text-white sm:text-4xl md:text-5xl"
-              loop={false}
               showCursor={true}
               typingSpeed={40}
             />
@@ -171,23 +175,28 @@ function App() {
         <PrizePool />
 
         <section id="sponsors" data-fade className="flex min-h-screen items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
-          <div className="mx-auto w-full max-w-[1400px]">
-            <div className="flex flex-col gap-10 py-10">
+          <div className="mx-auto w-full max-w-[1100px]">
+            <div className="mb-16 text-center max-w-2xl mx-auto">
+              <p className="text-xs tracking-wide text-white/50 leading-relaxed uppercase">
+                HOH is made possible by the generous support of our sponsors. These visionary organizations are building the foundation for the Age of Autonomous Agents.
+              </p>
+            </div>
+            <div className="flex flex-col gap-12 py-6">
               {(() => {
                 const categories = sponsorsData?.sponsorsSection?.categories ?? [];
                 return categories.map((cat, idx) => (
-                  <div key={`tier-${idx}`} className="flex flex-col gap-6">
-                    <div className="flex items-center justify-center bg-transparent border border-white/10 text-white rounded-2xl py-4">
-                      <h2 className="text-4xl font-bold">{cat.tier}</h2>
+                  <div key={`tier-${idx}`} className="flex flex-col gap-0 items-center w-full">
+                    <div className="flex items-center justify-center bg-[#050505] w-full text-white py-2 mb-4">
+                      <h2 className="text-[10px] font-bold uppercase tracking-[0.25em]" style={{ color: idx === 0 ? '#00e5ff' : 'white' }}>{cat.tier}</h2>
                     </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="flex flex-wrap justify-center gap-4 w-full">
                       {(cat.sponsors || []).map((s, sidx) => (
                         <div
                           key={`s-${idx}-${sidx}`}
-                          className="flex items-center justify-center bg-white/5 border border-white/10 rounded-2xl p-6 transition-all duration-300 hover:border-white/20 hover:bg-white/8"
+                          className="flex items-center justify-center bg-[#050505] p-8 w-full sm:w-[48%] md:w-[31%] min-h-[140px]"
                         >
-                          <img src={s.image || s.logo} alt={s.name} className="max-h-40 object-contain mx-auto" />
+                          <img src={s.image || s.logo} alt={s.name} className="max-h-16 object-contain mx-auto" />
                         </div>
                       ))}
                     </div>

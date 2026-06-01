@@ -73,42 +73,42 @@ function PrizePool() {
         </div>
 
         {/* Podium — 2nd | 1st | 3rd */}
-        <div className="flex items-end justify-center gap-4 mb-16">
+        <div className="flex items-end justify-center mb-16 relative w-full sm:gap-4">
           {/* 2nd Place */}
           {second && (
             <div
-              className="flex-1 max-w-[220px] flex flex-col items-center text-center px-6 py-8"
+              className="relative z-0 flex-1 w-full max-w-[140px] sm:max-w-[220px] flex flex-col items-center text-center px-2 sm:px-6 py-6 sm:py-8 -mr-6 sm:mr-0"
               style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.07)' }}
             >
               {TROPHY_SMALL()}
-              <p className="mt-4 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/35 mb-2">2nd Place</p>
-              <p className="text-2xl font-bold text-white">{second.amount}</p>
-              <span className="mt-3 border border-white/15 px-2 py-0.5 text-[8px] uppercase tracking-widest text-white/30">SILVER TIER</span>
+              <p className="mt-4 text-[7px] sm:text-[9px] font-semibold uppercase tracking-[0.2em] text-white/35 mb-2">2nd Place</p>
+              <p className="text-lg sm:text-2xl font-bold text-white">{second.amount}</p>
+              <span className="mt-3 border border-white/15 px-1 sm:px-2 py-0.5 text-[6px] sm:text-[8px] uppercase tracking-widest text-white/30 hidden sm:inline-block">SILVER TIER</span>
             </div>
           )}
 
           {/* 1st Place — taller, cyan accented */}
           {first && (
             <div
-              className="flex-1 max-w-[260px] flex flex-col items-center text-center px-8 py-10 relative"
+              className="relative z-10 flex-1 w-full max-w-[160px] sm:max-w-[260px] flex flex-col items-center text-center px-4 sm:px-8 py-8 sm:py-10"
               style={{ background: '#0d0d0d', border: `1px solid ${CYAN}40`, boxShadow: `0 0 40px ${CYAN}10, 0 0 80px ${CYAN}06` }}
             >
               {TROPHY_FIRST}
-              <p className="mt-4 text-[9px] font-semibold uppercase tracking-[0.2em] mb-2" style={{ color: CYAN }}>GRAND CHAMPIONS</p>
-              <p className="text-4xl font-bold text-white">{first.amount}</p>
+              <p className="mt-4 text-[7px] sm:text-[9px] font-semibold uppercase tracking-[0.2em] mb-2" style={{ color: CYAN }}>GRAND CHAMPIONS</p>
+              <p className="text-xl sm:text-4xl font-bold text-white">{first.amount}</p>
             </div>
           )}
 
           {/* 3rd Place */}
           {third && (
             <div
-              className="flex-1 max-w-[220px] flex flex-col items-center text-center px-6 py-8"
+              className="relative z-0 flex-1 w-full max-w-[140px] sm:max-w-[220px] flex flex-col items-center text-center px-2 sm:px-6 py-6 sm:py-8 -ml-6 sm:ml-0"
               style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.07)' }}
             >
               {TROPHY_SMALL()}
-              <p className="mt-4 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/35 mb-2">3rd Place</p>
-              <p className="text-2xl font-bold text-white">{third.amount}</p>
-              <span className="mt-3 border border-white/15 px-2 py-0.5 text-[8px] uppercase tracking-widest text-white/30">BRONZE TIER</span>
+              <p className="mt-4 text-[7px] sm:text-[9px] font-semibold uppercase tracking-[0.2em] text-white/35 mb-2">3rd Place</p>
+              <p className="text-lg sm:text-2xl font-bold text-white">{third.amount}</p>
+              <span className="mt-3 border border-white/15 px-1 sm:px-2 py-0.5 text-[6px] sm:text-[8px] uppercase tracking-widest text-white/30 hidden sm:inline-block">BRONZE TIER</span>
             </div>
           )}
         </div>
