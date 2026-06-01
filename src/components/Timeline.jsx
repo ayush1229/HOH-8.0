@@ -99,7 +99,7 @@ function Timeline() {
             <DayCard
               day={day}
               label={DAY_LABELS[di] ?? `DAY ${di}`}
-              activeEventIndex={di === 1 ? activeEventIndex : -1}
+              activeEventIndex={-1}
             />
           </div>
         ))}
@@ -130,7 +130,7 @@ function Timeline() {
         <DayCard
           day={schedule[activeIndex]}
           label={DAY_LABELS[activeIndex] ?? `DAY ${activeIndex}`}
-          activeEventIndex={activeIndex === 1 ? activeEventIndex : -1}
+          activeEventIndex={-1}
         />
       </div>
     </div>
