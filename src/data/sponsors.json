@@ -9,7 +9,8 @@
           {
             "name": "algoquant",
             "logo": "/sponsors/algoquant.jpg",
-            "image": "/sponsors/images/algoquantimg.webp"
+            "image": "/sponsors/images/algoquantimg.webp",
+            "link": "https://algoquant.com"
           }
         ]
       },
@@ -19,7 +20,8 @@
           {
             "name": "github",
             "logo": "/sponsors/github.jpg",
-            "image": "/sponsors/images/githubimg.webp"
+            "image": "/sponsors/images/githubimg.webp",
+            "link": "https://github.com"
           }
         ]
       },
@@ -29,17 +31,20 @@
           {
             "name": "devfolio",
             "logo": "/sponsors/devfolio.svg",
-            "image": "/sponsors/images/devfolioimg.webp"
+            "image": "/sponsors/images/devfolioimg.webp",
+            "link": "https://devfolio.co"
           },
           {
             "name": "ETHIndia",
             "logo": "/sponsors/ETHIndia.png",
-            "image": "/sponsors/images/ETHIndiaimg.webp"
+            "image": "/sponsors/images/ETHIndiaimg.webp",
+            "link": "https://ethindia.co"
           },
           {
             "name": "APTOS",
             "logo": "/sponsors/aptos.png",
-            "image": "/sponsors/images/aptosimg.webp"
+            "image": "/sponsors/images/aptosimg.webp",
+            "link": "https://aptoslabs.com"
           }
         ]
       },
@@ -49,7 +54,8 @@
           {
             "name": "Endless Domains",
             "logo": "/sponsors/endlessdomains_logo.jpg",
-            "image": "/sponsors/images/endlessdomainsimg.svg"
+            "image": "/sponsors/images/endlessdomainsimg.svg",
+            "link": "https://endlessdomains.io/"
           }
         ]
       },
@@ -59,7 +65,8 @@
           {
             "name": "theDevArmy",
             "logo": "/sponsors/thedevarmy.png",
-            "image": "/sponsors/images/thedevarmyimg.png"
+            "image": "/sponsors/images/thedevarmyimg.png",
+            "link": "https://thedevarmy.com"
           }
         ]
       }

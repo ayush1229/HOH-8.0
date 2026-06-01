@@ -191,14 +191,20 @@ function App() {
                     </div>
                     
                     <div className="flex flex-wrap justify-center gap-4 w-full">
-                      {(cat.sponsors || []).map((s, sidx) => (
-                        <div
-                          key={`s-${idx}-${sidx}`}
-                          className="flex items-center justify-center bg-[#050505] p-8 w-full sm:w-[48%] md:w-[31%] min-h-[140px]"
-                        >
-                          <img src={s.image || s.logo} alt={s.name} className="max-h-16 object-contain mx-auto" />
-                        </div>
-                      ))}
+                      {(cat.sponsors || []).map((s, sidx) => {
+                        const CardWrapper = s.link ? 'a' : 'div';
+                        return (
+                          <CardWrapper
+                            key={`s-${idx}-${sidx}`}
+                            href={s.link || undefined}
+                            target={s.link ? "_blank" : undefined}
+                            rel={s.link ? "noopener noreferrer" : undefined}
+                            className={`flex items-center justify-center bg-[#050505] p-8 w-full sm:w-[48%] md:w-[31%] min-h-[140px] ${s.link ? 'hover:bg-[#0a0a0a] transition-colors duration-200 cursor-pointer' : ''}`}
+                          >
+                            <img src={s.image || s.logo} alt={s.name} className="max-h-16 object-contain mx-auto" />
+                          </CardWrapper>
+                        );
+                      })}
                     </div>
                   </div>
                 ));
