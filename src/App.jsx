@@ -262,7 +262,7 @@ function App() {
               })()}
 
               {/* Still have queries */}
-              <div className="mt-20 flex flex-col items-center text-center border-t border-white/10 pt-16">
+              <div id="contact" className="mt-20 flex flex-col items-center text-center border-t border-white/10 pt-16">
                 <h3 className="text-2xl font-semibold text-white mb-3">Still have queries?</h3>
                 <p className="text-sm text-white/40 max-w-xs leading-relaxed mb-8">
                   Connect directly with our core maintainers via the community channels for realtime assistance.
