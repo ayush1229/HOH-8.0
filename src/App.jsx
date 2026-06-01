@@ -5,6 +5,7 @@ import TextType from "./components/TypeText";
 import MagicBento from "./components/MagicBento";
 import Timeline from "./components/Timeline";
 import PrizePool from "./components/PrizePool";
+import SpecialAwards from "./components/SpecialAwards";
 import ScrollStack, { ScrollStackItem } from "./components/ScrollStack";
 import sponsorsData from "./data/sponsors.json";
 import Accordion, { AccordionItem, AccordionTrigger, AccordionPanel } from "./components/SimpleAccordion";
@@ -72,11 +73,11 @@ function App() {
       </div>
 
       <main className="snap-container relative z-20 h-screen snap-y snap-mandatory overflow-y-auto scroll-smooth">
-        <section className="flex min-h-screen snap-start snap-always items-center justify-center px-4 pt-20 text-center">
+        <section id="home" className="flex min-h-screen snap-start snap-always items-center justify-center px-4 pt-20 text-center">
           <TextType className="text-4xl text-white sm:text-5xl md:text-6xl" />
         </section>
 
-        <section className="flex min-h-screen snap-start snap-always items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
+        <section id="about" className="flex min-h-screen snap-start snap-always items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
           <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-12">
             <MagicBento
               cards={infoCards}
@@ -112,8 +113,9 @@ function App() {
           <Timeline />
         </section>
         <PrizePool />
+        <SpecialAwards />
 
-        <section className="flex min-h-screen snap-start snap-always items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
+        <section id="sponsors" className="flex min-h-screen snap-start snap-always items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
           <div className="mx-auto w-full max-w-[1400px]">
             <ScrollStack
               className="h-screen no-scrollbar"
@@ -123,7 +125,7 @@ function App() {
               baseScale={0.75}
               blurAmount={1}
               footer={
-                <div className="mx-auto w-full max-w-[1000px] text-white py-16">
+                <div id="faq" className="mx-auto w-full max-w-[1000px] text-white py-16">
                   <h2 className="text-4xl font-bold mb-6">{faqData?.faqSection?.title ?? 'FAQ'}</h2>
                   <p className="text-white/80 mb-8">{faqData?.faqSection?.description}</p>
                   <Accordion>

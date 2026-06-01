@@ -31,7 +31,7 @@ const PrizePool = () => {
   }, []);
 
   return (
-    <section className="flex min-h-screen snap-start snap-always items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
+    <section id="prize" className="flex min-h-screen snap-start snap-always items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
       <div className="mx-auto flex w-full max-w-[1400px] items-center">
         <div className="w-1/3 pr-8 text-left text-white">
           <h2 className="text-6xl sm:text-7xl font-bold">PRIZE POOL</h2>
