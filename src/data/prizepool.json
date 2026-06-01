@@ -1,0 +1,44 @@
+{
+  "prizePool": {
+    "totalAmount": "₹ 110,000+",
+    "mainPrizes": [
+      {
+        "position": "First Place",
+        "amount": "₹ 30,000",
+        "description": "The grand prize for the most innovative and impactful ocean technology solution."
+      },
+      {
+        "position": "Second Place",
+        "amount": "₹ 20,000",
+        "description": "Runner-up prize for exceptional creativity and technical execution."
+      },
+      {
+        "position": "Third Place",
+        "amount": "₹ 10,000",
+        "description": "Third place prize for outstanding achievement in ocean innovation."
+      }
+    ],
+    "specialAwards": [
+      {
+        "category": "Best Sustainability Solution",
+        "amount": "₹ 18,000"
+      },
+      {
+        "category": "Best All Girls",
+        "amount": "₹ 8,000"
+      },
+      {
+        "category": "Best Beginner",
+        "amount": "₹ 8,000"
+      },
+      {
+        "category": "Best Web3",
+        "amount": "₹ 8,000"
+      },
+      {
+        "category": "Best AI Agents",
+        "amount": "₹ 8,000"
+      }
+    ]
+  }
+}

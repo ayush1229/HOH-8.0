@@ -1,0 +1,114 @@
+{
+  "schedule": [
+    {
+      "day": "DAY 0",
+      "events": [
+        {
+          "name": "Checkin",
+          "time": "8:00 AM - 1:00 PM",
+          "location": "Mini Auditorium"
+        },
+        {
+          "name": "Opening Ceremony",
+          "time": "2:00 PM - 4:00 PM",
+          "location": "Mini Auditorium"
+        },
+        {
+          "name": "Mentoring",
+          "time": "4:00 PM - 5:30 PM",
+          "location": "New Lecture Hall"
+        },
+        {
+          "name": "AWS Workshop",
+          "time": "6:00 PM - 7:00 PM",
+          "location": "New Lecture Hall"
+        },
+        {
+          "name": "Mentoring Continues",
+          "time": "7:00 PM",
+          "location": "New Lecture Hall"
+        },
+        {
+          "name": "Dinner",
+          "time": "7:45 PM - 9:00 PM",
+          "location": "Mess"
+        }
+      ]
+    },
+    {
+      "day": "DAY 1",
+      "events": [
+        {
+          "name": "Breakfast",
+          "time": "7:30 AM - 8:30 AM",
+          "location": "Mess"
+        },
+        {
+          "name": "Github Session And Cryptic Hunt",
+          "time": "9:30 AM - 11:00 AM",
+          "location": "New Lecture Hall"
+        },
+        {
+          "name": "Endless Domain Session",
+          "time": "11:00 AM - 1:00 PM",
+          "location": "New Lecture Hall"
+        },
+        {
+          "name": "Lunch",
+          "time": "1:00 PM - 2:00 PM",
+          "location": "Mess"
+        },
+        {
+          "name": "Hacking Continues",
+          "time": "2:00 PM - 3:00 PM",
+          "location": "New Lecture Hall"
+        },
+        {
+          "name": "Mid Evaluation",
+          "time": "3:00 PM - 4:30 PM",
+          "location": "New Lecture Hall"
+        },
+        {
+          "name": "Mentoring Session",
+          "time": "5:00 PM - 8:00 PM",
+          "location": "New Lecture Hall"
+        },
+        {
+          "name": "Dinner",
+          "time": "7:45 PM - 9:00 PM",
+          "location": "Mess"
+        }
+      ]
+    },
+    {
+      "day": "DAY 2",
+      "events": [
+        {
+          "name": "Breakfast",
+          "time": "7:45 AM - 9:00 AM",
+          "location": "Mess"
+        },
+        {
+          "name": "Final Submission",
+          "time": "9:00 AM - 10:00 AM",
+          "location": "New Lecture Hall"
+        },
+        {
+          "name": "Final Evaluation",
+          "time": "10:30 AM - 1:30 PM",
+          "location": "New Lecture Hall"
+        },
+        {
+          "name": "Lunch",
+          "time": "1:00 PM - 2:30 PM",
+          "location": "Mess"
+        },
+        {
+          "name": "Closing and Result",
+          "time": "3:00 PM - 5:00 PM",
+          "location": "Auditorium"
+        }
+      ]
+    }
+  ]
+}

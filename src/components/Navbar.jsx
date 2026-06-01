@@ -16,7 +16,7 @@ export function StickyNavbar() {
   const navItems = ["About", "Prize", "Sponsors", "FAQ", "Contact", "Team"];
 
   return (
-    <header className="sticky top-0 z-20 w-full border-b border-white/10 bg-black/30 backdrop-blur-md">
+    <header className="fixed left-0 top-0 z-40 w-full border-b border-white/15 bg-black/35 backdrop-blur-lg">
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="#" className="flex items-center gap-3 text-xl font-semibold tracking-wide text-white">
           <img src={logo} alt="HOH 8.0 Logo" className="h-10 w-10 object-contain" />

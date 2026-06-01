@@ -1,6 +1,37 @@
 @import "tailwindcss";
 
-body {
-  background-color: #120F17;
+html,
+body,
+#root {
+  min-height: 100%;
+  overflow-x: hidden;
 }
 
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body {
+  background-color: #120F17;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.snap-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.snap-container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
