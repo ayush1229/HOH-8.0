@@ -34,14 +34,14 @@ const PrizePool = () => {
       <div className="mx-auto flex w-full flex-col lg:flex-row max-w-[1400px] items-center lg:justify-between gap-12 lg:gap-20">
         <div className="w-full lg:w-[45%] text-center lg:text-left text-black">
           <h2 className="text-6xl sm:text-7xl font-bold">PRIZE POOL</h2>
-          <h1 ref={amountRef} className="mt-6 text-8xl sm:text-9xl font-extrabold leading-tight whitespace-nowrap inline-block">{total}</h1>
+          <h1 ref={amountRef} className="mt-6 text-5xl sm:text-8xl lg:text-9xl font-extrabold leading-tight whitespace-nowrap inline-block">{total}</h1>
 
           <div className="mt-8">
             {(() => {
               const categories = sponsorsData?.sponsorsSection?.categories ?? [];
               const logos = categories.flatMap(cat => (cat.sponsors ?? []).map(s => ({ src: s.logo, alt: s.name })));
               return (
-                <div style={{ height: 120, position: 'relative', overflow: 'hidden', width: logoWidth }}>
+                <div style={{ height: 120, position: 'relative', overflow: 'hidden', width: logoWidth, maxWidth: '100%' }}>
                   <LogoLoop
                     logos={logos}
                     speed={100}
