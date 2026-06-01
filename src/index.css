@@ -5,6 +5,7 @@ body,
 #root {
   min-height: 100%;
   overflow-x: hidden;
+  max-width: 100vw;
 }
 
 html {
@@ -17,6 +18,8 @@ body {
   color: #000000;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 html::-webkit-scrollbar,

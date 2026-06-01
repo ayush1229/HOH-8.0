@@ -63,7 +63,7 @@ function App() {
   ];
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden">
+    <div className="relative h-screen w-screen overflow-hidden max-w-[100vw]">
       <div className="relative z-50">
         <StickyNavbar />
       </div>
@@ -118,14 +118,14 @@ function App() {
         <PrizePool />
         <SpecialAwards />
 
-        <section id="sponsors" className="flex min-h-screen items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
+        <section id="sponsors" className="flex min-h-screen items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10 bg-slate-900">
           <div className="mx-auto w-full max-w-[1400px]">
             <div className="flex flex-col gap-10 py-10">
               {(() => {
                 const categories = sponsorsData?.sponsorsSection?.categories ?? [];
                 return categories.map((cat, idx) => (
                   <div key={`tier-${idx}`} className="flex flex-col gap-6">
-                    <div className="flex items-center justify-center bg-transparent border border-gray-300 text-black rounded-2xl py-4">
+                    <div className="flex items-center justify-center bg-transparent border border-slate-600 text-white rounded-2xl py-4">
                       <h2 className="text-4xl font-bold">{cat.tier}</h2>
                     </div>
                     
@@ -143,9 +143,9 @@ function App() {
                 ));
               })()}
             </div>
-            <div id="faq" className="mx-auto w-full max-w-[1000px] text-black py-16">
+            <div id="faq" className="mx-auto w-full max-w-[1000px] text-white py-16">
               <h2 className="text-4xl font-bold mb-6">{faqData?.faqSection?.title ?? 'FAQ'}</h2>
-              <p className="text-black/80 mb-8">{faqData?.faqSection?.description}</p>
+              <p className="text-white/70 mb-8">{faqData?.faqSection?.description}</p>
               <Accordion>
                 {(faqData?.faqSection?.faqs ?? []).map((f, i) => (
                   <AccordionItem key={i} value={String(i)}>

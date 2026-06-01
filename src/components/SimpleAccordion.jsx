@@ -43,12 +43,12 @@ export function AccordionTrigger({ children, itemValue }) {
     <button
       type="button"
       onClick={() => ctx.toggle(itemValue)}
-      className="w-full text-left px-6 py-4 border-b border-black/10 bg-black/5 hover:bg-black/10 transition"
+      className="w-full text-left px-6 py-4 border-b border-white/10 bg-white/5 hover:bg-white/10 transition"
       aria-expanded={!!isOpen}
     >
       <div className="flex items-center justify-between">
-        <div className="text-lg font-medium text-black">{children}</div>
-        <div className="text-black/60">{isOpen ? '−' : '+'}</div>
+        <div className="text-lg font-medium text-white">{children}</div>
+        <div className="text-white/60">{isOpen ? '−' : '+'}</div>
       </div>
     </button>
   );
@@ -75,7 +75,7 @@ export function AccordionPanel({ children, itemValue }) {
     <div
       ref={ref}
       style={{ maxHeight: isOpen ? height : 0, transition: 'max-height 300ms ease', overflow: 'hidden' }}
-      className="px-6 text-black/85 bg-black/[0.02]"
+      className="px-6 text-white/85 bg-white/[0.03]"
     >
       <div className="py-4">{children}</div>
     </div>
