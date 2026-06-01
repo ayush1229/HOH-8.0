@@ -78,7 +78,7 @@ function PrizePool() {
           {second && (
             <div
               data-fade-step
-              className="relative z-0 flex-1 w-full max-w-[140px] sm:max-w-[220px] flex flex-col items-center text-center px-2 sm:px-6 py-6 sm:py-8 -mr-6 sm:mr-0"
+              className="relative z-0 flex-1 w-full max-w-[140px] sm:max-w-[220px] flex flex-col items-center text-center pl-1 pr-5 sm:px-6 py-6 sm:py-8 -mr-4 sm:mr-0"
               style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.07)', transitionDelay: '0.2s' }}
             >
               {TROPHY_SMALL()}
@@ -105,7 +105,7 @@ function PrizePool() {
           {third && (
             <div
               data-fade-step
-              className="relative z-0 flex-1 w-full max-w-[140px] sm:max-w-[220px] flex flex-col items-center text-center px-2 sm:px-6 py-6 sm:py-8 -ml-6 sm:ml-0"
+              className="relative z-0 flex-1 w-full max-w-[140px] sm:max-w-[220px] flex flex-col items-center text-center pr-1 pl-5 sm:px-6 py-6 sm:py-8 -ml-4 sm:ml-0"
               style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.07)', transitionDelay: '0.4s' }}
             >
               {TROPHY_SMALL()}

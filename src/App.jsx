@@ -26,7 +26,7 @@ function App() {
         <StickyNavbar />
       </div>
 
-      <main className="relative z-10 h-screen overflow-y-auto scroll-smooth" style={{ fontFamily: "'SpaceGrotesk', sans-serif" }}>
+      <main className="relative z-10 h-screen overflow-y-auto scroll-smooth no-scrollbar" style={{ fontFamily: "'SpaceGrotesk', sans-serif" }}>
         {/* Hero / Landing Section */}
         <section id="home" className="relative flex min-h-screen flex-col items-center justify-center px-4 text-center">
           {/* Glowing bordered rectangle */}
