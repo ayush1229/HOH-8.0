@@ -291,7 +291,7 @@ function App() {
             </div>
           </div>
           <div className="mx-auto mt-6 max-w-[1400px] text-xs text-white/20">
-            © 2024 Hack on Hills 8.0 · The Age of Autonomous Agents
+            © 2026 Hack on Hills 8.0 · The Age of Autonomous Agents
           </div>
         </footer>
       </main>
