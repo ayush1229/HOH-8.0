@@ -80,6 +80,16 @@ body::before {
   transform: translateY(0);
 }
 
+[data-fade-step] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+[data-fade].visible [data-fade-step] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Staggered card load animation */
 @keyframes fadeSlideUp {
   from { opacity: 0; transform: translateY(32px); }

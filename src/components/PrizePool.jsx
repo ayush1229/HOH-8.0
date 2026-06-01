@@ -77,8 +77,9 @@ function PrizePool() {
           {/* 2nd Place */}
           {second && (
             <div
+              data-fade-step
               className="relative z-0 flex-1 w-full max-w-[140px] sm:max-w-[220px] flex flex-col items-center text-center px-2 sm:px-6 py-6 sm:py-8 -mr-6 sm:mr-0"
-              style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.07)' }}
+              style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.07)', transitionDelay: '0.2s' }}
             >
               {TROPHY_SMALL()}
               <p className="mt-4 text-[7px] sm:text-[9px] font-semibold uppercase tracking-[0.2em] text-white/35 mb-2">2nd Place</p>
@@ -90,8 +91,9 @@ function PrizePool() {
           {/* 1st Place — taller, cyan accented */}
           {first && (
             <div
+              data-fade-step
               className="relative z-10 flex-1 w-full max-w-[160px] sm:max-w-[260px] flex flex-col items-center text-center px-4 sm:px-8 py-8 sm:py-10"
-              style={{ background: '#0d0d0d', border: `1px solid ${CYAN}40`, boxShadow: `0 0 40px ${CYAN}10, 0 0 80px ${CYAN}06` }}
+              style={{ background: '#0d0d0d', border: `1px solid ${CYAN}40`, boxShadow: `0 0 40px ${CYAN}10, 0 0 80px ${CYAN}06`, transitionDelay: '0s' }}
             >
               {TROPHY_FIRST}
               <p className="mt-4 text-[7px] sm:text-[9px] font-semibold uppercase tracking-[0.2em] mb-2" style={{ color: CYAN }}>GRAND CHAMPIONS</p>
@@ -102,8 +104,9 @@ function PrizePool() {
           {/* 3rd Place */}
           {third && (
             <div
+              data-fade-step
               className="relative z-0 flex-1 w-full max-w-[140px] sm:max-w-[220px] flex flex-col items-center text-center px-2 sm:px-6 py-6 sm:py-8 -ml-6 sm:ml-0"
-              style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.07)' }}
+              style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.07)', transitionDelay: '0.4s' }}
             >
               {TROPHY_SMALL()}
               <p className="mt-4 text-[7px] sm:text-[9px] font-semibold uppercase tracking-[0.2em] text-white/35 mb-2">3rd Place</p>
@@ -122,12 +125,16 @@ function PrizePool() {
         {/* Special Awards — 2 col then 3 col */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           {specialAwards.slice(0, 2).map((award, i) => (
-            <SpecialCard key={i} award={award} icon={SPECIAL_ICONS[i]} badge={SPECIAL_BADGES[i]} />
+            <div key={i} data-fade-step style={{ transitionDelay: `${i * 0.15}s` }}>
+              <SpecialCard award={award} icon={SPECIAL_ICONS[i]} badge={SPECIAL_BADGES[i]} />
+            </div>
           ))}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {specialAwards.slice(2).map((award, i) => (
-            <SpecialCard key={i + 2} award={award} icon={SPECIAL_ICONS[i + 2]} badge={SPECIAL_BADGES[i + 2]} />
+            <div key={i + 2} data-fade-step style={{ transitionDelay: `${(i + 2) * 0.15}s` }}>
+              <SpecialCard award={award} icon={SPECIAL_ICONS[i + 2]} badge={SPECIAL_BADGES[i + 2]} />
+            </div>
           ))}
         </div>
 

@@ -95,12 +95,13 @@ function Timeline() {
       {/* Desktop: 3 columns */}
       <div className="hidden md:grid md:grid-cols-3 gap-6">
         {schedule.map((day, di) => (
-          <DayCard
-            key={di}
-            day={day}
-            label={DAY_LABELS[di] ?? `DAY ${di}`}
-            activeEventIndex={di === 1 ? activeEventIndex : -1}
-          />
+          <div key={di} data-fade-step style={{ transitionDelay: `${di * 0.15}s` }}>
+            <DayCard
+              day={day}
+              label={DAY_LABELS[di] ?? `DAY ${di}`}
+              activeEventIndex={di === 1 ? activeEventIndex : -1}
+            />
+          </div>
         ))}
       </div>
 
