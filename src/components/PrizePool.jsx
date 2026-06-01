@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import CardSwap, { Card } from './CardSwap';
 import prizeData from '../data/prizepool.json';
 import LogoLoop from './LogoLoop';
 import sponsorsData from '../data/sponsors.json';
@@ -31,9 +30,9 @@ const PrizePool = () => {
   }, []);
 
   return (
-    <section id="prize" className="flex min-h-screen items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
-      <div className="mx-auto flex w-full flex-col lg:flex-row max-w-[1400px] items-center gap-12 lg:gap-0">
-        <div className="w-full lg:w-1/3 lg:pr-8 text-center lg:text-left text-black">
+    <section id="prize" className="flex items-center px-4 py-8 sm:px-6 lg:px-10">
+      <div className="mx-auto flex w-full flex-col lg:flex-row max-w-[1400px] items-center lg:justify-between gap-12 lg:gap-20">
+        <div className="w-full lg:w-[45%] text-center lg:text-left text-black">
           <h2 className="text-6xl sm:text-7xl font-bold">PRIZE POOL</h2>
           <h1 ref={amountRef} className="mt-6 text-8xl sm:text-9xl font-extrabold leading-tight whitespace-nowrap inline-block">{total}</h1>
 
@@ -60,26 +59,30 @@ const PrizePool = () => {
           </div>
         </div>
 
-        <div className="relative w-full lg:w-2/3 h-[400px] sm:h-[520px] flex justify-center mt-8 lg:mt-0">
-          <CardSwap width={600} height={460} delay={5000}>
-            {mainPrizes.map((p, idx) => {
-              const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : '';
-              return (
-                <Card
-                  key={idx}
-                  customClass="flex items-center justify-center p-6 bg-white/90 border-black/20 text-black rounded-xl"
-                >
-                  <div className="relative w-full h-full flex flex-col items-center justify-center px-6">
-                    <div className="absolute top-4 left-4 text-sm text-black/80 uppercase">{p.position}</div>
-                    <div className="flex flex-col items-center">
-                      <h1 className="mt-3 text-5xl font-extrabold text-black">{medal} {p.amount}</h1>
-                      <h2 className="mt-3 max-w-[320px] text-sm text-black/70">{p.description}</h2>
-                    </div>
+        <div className="w-full lg:w-[50%] flex flex-col gap-6 mt-8 lg:mt-0 items-center lg:items-end justify-center">
+          {mainPrizes.map((p, idx) => {
+            const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : '';
+            return (
+              <div
+                key={idx}
+                className="w-full max-w-xl flex items-center p-8 bg-white border border-gray-100 text-black rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden group"
+              >
+                {/* Feather edge inner glow effect */}
+                <div className="absolute inset-0 shadow-[inset_0_0_50px_rgba(255,255,255,1)] pointer-events-none rounded-3xl transition-opacity duration-300 group-hover:opacity-75"></div>
+                
+                <div className="flex w-full items-center justify-between z-10 gap-6">
+                  <div className="text-left flex-1">
+                    <div className="text-sm font-bold text-black/40 uppercase tracking-widest mb-2">{p.position}</div>
+                    <h2 className="text-sm sm:text-base text-black/80 leading-relaxed font-medium max-w-[280px]">{p.description}</h2>
                   </div>
-                </Card>
-              );
-            })}
-          </CardSwap>
+                  <div className="text-right whitespace-nowrap flex flex-col items-end justify-center">
+                    <span className="text-3xl mb-2">{medal}</span>
+                    <h1 className="text-3xl sm:text-4xl font-extrabold text-black tracking-tight">{p.amount}</h1>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

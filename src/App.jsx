@@ -112,7 +112,7 @@ function App() {
           </div>
         </section>
 
-        <section className="flex min-h-screen items-center px-4 pb-10 sm:px-6 lg:px-10">
+        <section className="flex items-center px-4 py-0 sm:px-6 lg:px-10">
           <Timeline />
         </section>
         <PrizePool />

@@ -18,12 +18,35 @@ function Timeline() {
   const activeDay = schedule[activeIndex] || { events: [] };
   const leavingDay = leavingIndex === null ? null : schedule[leavingIndex];
 
+  const overflowTimeoutRef = useRef(null);
+
   useEffect(() => {
     const scroller = scrollRef.current;
     if (!scroller) return;
 
     scroller.scrollTop = 0;
     setActiveEventIndex(0);
+
+    const handleWheel = (e) => {
+      const { scrollTop, scrollHeight, clientHeight } = scroller;
+      const isAtTop = scrollTop <= 0;
+      const isAtBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight - 1;
+
+      if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
+        // Disable overflow so the wheel event bubbles up naturally to main scroll
+        scroller.style.overflowY = 'hidden';
+        if (overflowTimeoutRef.current) clearTimeout(overflowTimeoutRef.current);
+        overflowTimeoutRef.current = setTimeout(() => {
+          scroller.style.overflowY = 'auto';
+        }, 400);
+      }
+    };
+
+    scroller.addEventListener('wheel', handleWheel, { passive: true });
+    return () => {
+      scroller.removeEventListener('wheel', handleWheel);
+      if (overflowTimeoutRef.current) clearTimeout(overflowTimeoutRef.current);
+    };
   }, [activeIndex]);
 
   useEffect(() => {
