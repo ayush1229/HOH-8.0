@@ -13,7 +13,8 @@ html {
 }
 
 body {
-  background-color: #120F17;
+  background-color: #ffffff;
+  color: #000000;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }

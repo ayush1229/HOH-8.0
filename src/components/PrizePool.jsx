@@ -31,9 +31,9 @@ const PrizePool = () => {
   }, []);
 
   return (
-    <section id="prize" className="flex min-h-screen snap-start snap-always items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
-      <div className="mx-auto flex w-full max-w-[1400px] items-center">
-        <div className="w-1/3 pr-8 text-left text-white">
+    <section id="prize" className="flex min-h-screen items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
+      <div className="mx-auto flex w-full flex-col lg:flex-row max-w-[1400px] items-center gap-12 lg:gap-0">
+        <div className="w-full lg:w-1/3 lg:pr-8 text-center lg:text-left text-black">
           <h2 className="text-6xl sm:text-7xl font-bold">PRIZE POOL</h2>
           <h1 ref={amountRef} className="mt-6 text-8xl sm:text-9xl font-extrabold leading-tight whitespace-nowrap inline-block">{total}</h1>
 
@@ -60,20 +60,20 @@ const PrizePool = () => {
           </div>
         </div>
 
-        <div className="relative w-2/3 h-[520px]">
+        <div className="relative w-full lg:w-2/3 h-[400px] sm:h-[520px] flex justify-center mt-8 lg:mt-0">
           <CardSwap width={600} height={460} delay={5000}>
             {mainPrizes.map((p, idx) => {
               const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : '';
               return (
                 <Card
                   key={idx}
-                  customClass="flex items-center justify-center p-6 bg-black/90 border-white/20 text-white rounded-xl"
+                  customClass="flex items-center justify-center p-6 bg-white/90 border-black/20 text-black rounded-xl"
                 >
                   <div className="relative w-full h-full flex flex-col items-center justify-center px-6">
-                    <div className="absolute top-4 left-4 text-sm text-white/80 uppercase">{p.position}</div>
+                    <div className="absolute top-4 left-4 text-sm text-black/80 uppercase">{p.position}</div>
                     <div className="flex flex-col items-center">
-                      <h1 className="mt-3 text-5xl font-extrabold text-white">{medal} {p.amount}</h1>
-                      <h2 className="mt-3 max-w-[320px] text-sm text-white/70">{p.description}</h2>
+                      <h1 className="mt-3 text-5xl font-extrabold text-black">{medal} {p.amount}</h1>
+                      <h2 className="mt-3 max-w-[320px] text-sm text-black/70">{p.description}</h2>
                     </div>
                   </div>
                 </Card>

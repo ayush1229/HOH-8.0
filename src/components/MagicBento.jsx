@@ -662,8 +662,7 @@ const MagicBento = ({
                   clickEffect={clickEffect}
                   enableMagnetism={enableMagnetism}
                 >
-                  <div className="card__content flex h-full flex-col items-center justify-center text-center relative text-white">
-                    <span className="mb-4 text-4xl leading-none" aria-hidden="true">✨</span>
+                  <div className="card__content flex h-full flex-col items-center justify-center text-center relative text-black">
                     <h3 className={`card__title m-0 mb-3 text-2xl font-semibold ${textAutoHide ? 'text-clamp-1' : ''}`}>
                       {card.title}
                     </h3>
@@ -792,8 +791,7 @@ const MagicBento = ({
                   el.addEventListener('click', handleClick);
                 }}
               >
-                <div className="card__content flex h-full flex-col items-center justify-center text-center relative text-white">
-                  <span className="mb-4 text-4xl leading-none" aria-hidden="true">✨</span>
+                <div className="card__content flex h-full flex-col items-center justify-center text-center relative text-black">
                   <h3 className={`card__title m-0 mb-3 text-2xl font-semibold ${textAutoHide ? 'text-clamp-1' : ''}`}>
                     {card.title}
                   </h3>

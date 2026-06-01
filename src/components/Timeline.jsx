@@ -94,25 +94,25 @@ function Timeline() {
                 isFocused
                   ? "scale-100 opacity-100"
                   : isNearby
-                    ? "scale-95 opacity-55"
-                    : "scale-90 opacity-25"
+                    ? "scale-95 opacity-100"
+                    : "scale-90 opacity-100"
               } ${isLeaving ? "opacity-0" : ""}`}
             >
               <div
-                className={`absolute -left-10 top-3 h-4 w-4 rounded-full bg-gradient-to-br from-cyan-300 to-fuchsia-400 shadow-[0_0_22px_rgba(217,70,239,0.85)] transition-all duration-500 sm:-left-12 ${
+                className={`absolute -left-10 top-3 h-4 w-4 rounded-full bg-gradient-to-br from-cyan-600 to-fuchsia-600 shadow-[0_0_15px_rgba(192,38,211,0.5)] transition-all duration-500 sm:-left-12 ${
                   isFocused ? "scale-150" : "scale-75"
                 }`}
               />
-              <div className="rounded-lg border border-white/10 bg-white/[0.03] px-5 py-4 backdrop-blur-sm">
-                <p className="text-sm font-semibold uppercase text-cyan-200/85">{event.time}</p>
+              <div className="rounded-lg border border-black/10 bg-black/[0.03] px-5 py-4 backdrop-blur-sm">
+                <p className="text-sm font-semibold uppercase text-cyan-600/85">{event.time}</p>
                 <h3
                   className={`mt-2 font-bold transition-all duration-500 ${
-                    isFocused ? "text-3xl text-white sm:text-4xl" : "text-xl text-white/80 sm:text-2xl"
+                    isFocused ? "text-3xl text-black sm:text-4xl" : "text-xl text-black/80 sm:text-2xl"
                   }`}
                 >
                   {event.name}
                 </h3>
-                <p className="mt-2 text-base text-fuchsia-100/70">{event.location}</p>
+                <p className="mt-2 text-base text-black/70">{event.location}</p>
               </div>
             </article>
           );
@@ -122,14 +122,12 @@ function Timeline() {
   );
 
   return (
-    <div className="mx-auto w-full max-w-[1400px] px-2 text-white">
+    <div className="mx-auto w-full max-w-[1400px] px-2 text-black">
       <style>
         {`
           .timeline-scroll {
             scrollbar-width: none;
             -ms-overflow-style: none;
-            mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
           }
 
           .timeline-scroll::-webkit-scrollbar {
@@ -204,8 +202,8 @@ function Timeline() {
               onClick={() => handleDayChange(index)}
               className={`timeline-tab relative overflow-hidden rounded-md border px-8 py-3 text-sm font-semibold uppercase tracking-[0.18em] backdrop-blur-md transition duration-300 sm:text-base ${
                 isActive
-                  ? "border-cyan-200/60 bg-white/20 text-white"
-                  : "border-white/20 bg-white/[0.08] text-white/75 hover:border-fuchsia-200/50 hover:bg-white/[0.14] hover:text-white"
+                  ? "border-cyan-500/60 bg-black/10 text-black"
+                  : "border-black/20 bg-black/[0.08] text-black/75 hover:border-fuchsia-500/50 hover:bg-black/[0.14] hover:text-black"
               }`}
             >
               <span className="relative z-10">{label}</span>

@@ -105,7 +105,7 @@ const AwardCard = ({ award, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-      className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] transition-all duration-300 ${config.borderHover} ${config.bgGlow} ${gridSpanClass}`}
+      className={`group relative overflow-hidden rounded-3xl border border-black/10 bg-black/[0.02] transition-all duration-300 ${config.borderHover} ${config.bgGlow} ${gridSpanClass}`}
     >
       {/* Spotlight Hover Glow Layer (Desktop only/mouse devices) */}
       <div
@@ -118,10 +118,10 @@ const AwardCard = ({ award, index }) => {
       {/* Mobile Layout (Horizontal Row) */}
       <div className="flex w-full items-center justify-between p-4 px-6 md:hidden">
         <div className="flex items-center gap-3">
-          <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.03] ${config.colorClass}`}>
+          <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-black/[0.03] ${config.colorClass}`}>
             <IconComponent size={20} />
           </div>
-          <span className="text-left text-sm font-semibold text-white/90">{award.category}</span>
+          <span className="text-left text-sm font-semibold text-black/90">{award.category}</span>
         </div>
         <span className={`bg-gradient-to-r ${config.gradient} bg-clip-text text-lg font-bold text-transparent`}>
           {award.amount}
@@ -131,7 +131,7 @@ const AwardCard = ({ award, index }) => {
       {/* Desktop/Tablet Layout (Vertical Card) */}
       <div className="hidden flex-col items-center justify-between p-8 min-h-[220px] text-center md:flex h-full">
         {/* Glow effect matching the theme at the top */}
-        <div className={`relative flex h-14 w-14 items-center justify-center rounded-2xl bg-white/[0.03] transition-transform duration-500 group-hover:scale-110 ${config.colorClass}`}>
+        <div className={`relative flex h-14 w-14 items-center justify-center rounded-2xl bg-black/[0.03] transition-transform duration-500 group-hover:scale-110 ${config.colorClass}`}>
           <div
             className="absolute inset-0 rounded-2xl opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-40"
             style={{ backgroundColor: config.glowColor }}
@@ -140,7 +140,7 @@ const AwardCard = ({ award, index }) => {
         </div>
 
         <div className="mt-4 flex flex-col justify-center flex-grow">
-          <h3 className="text-xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors duration-300">
+          <h3 className="text-xl font-bold tracking-tight text-black/90 group-hover:text-black transition-colors duration-300">
             {award.category}
           </h3>
         </div>
@@ -159,7 +159,7 @@ const SpecialAwards = () => {
   const awards = prizeData?.prizePool?.specialAwards ?? [];
 
   return (
-    <section className="flex min-h-screen snap-start snap-always items-center justify-center px-4 pb-12 pt-28 sm:px-6 lg:px-10">
+    <section className="flex min-h-screen items-center justify-center px-4 pb-12 pt-28 sm:px-6 lg:px-10">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-10">
         
         {/* Header Block */}
@@ -178,7 +178,7 @@ const SpecialAwards = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mx-auto mt-4 max-w-2xl text-sm text-white/70 sm:text-base"
+            className="mx-auto mt-4 max-w-2xl text-sm text-black/70 sm:text-base"
           >
             Rewarding extraordinary projects, technical ingenuity, and diverse team achievements across distinct track criteria.
           </motion.p>
