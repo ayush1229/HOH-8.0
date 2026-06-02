@@ -17,7 +17,7 @@ const SPECIAL_ICONS = [
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={CYAN} strokeWidth="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg>,
 ];
 
-const SPECIAL_BADGES = ['TRACK AWARD', null, null, null, null];
+const SPECIAL_BADGES = ['TRACK AWARD', 'TRACK AWARD', 'TRACK AWARD', 'TRACK AWARD', 'TRACK AWARD'];
 
 const TROPHY_FIRST = (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={CYAN} strokeWidth="1.5">
@@ -70,6 +70,12 @@ function PrizePool() {
               <LogoLoop logos={logos} speed={80} direction="left" logoHeight={40} gap={48} hoverSpeed={20} scaleOnHover ariaLabel="Sponsors" width="100%" />
             </div>
           )}
+        </div>
+
+        <div className="text-center mb-12">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white" style={{ fontFamily: "'SpaceGrotesk', sans-serif" }}>
+            HOH 7.0 PRIZES
+          </h2>
         </div>
 
         {/* Podium — 2nd | 1st | 3rd */}

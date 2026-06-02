@@ -176,7 +176,10 @@ function App() {
 
         <section id="sponsors" data-fade className="flex min-h-screen items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
           <div className="mx-auto w-full max-w-[1100px]">
-            <div className="mb-16 text-center max-w-2xl mx-auto">
+            <div className="mb-16 text-center max-w-2xl mx-auto flex flex-col items-center">
+              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6" style={{ fontFamily: "'SpaceGrotesk', sans-serif" }}>
+                HOH 7.0 SPONSORS
+              </h2>
               <p className="text-xs tracking-wide text-white/50 leading-relaxed uppercase">
                 HOH is made possible by the generous support of our sponsors. These visionary organizations are building the foundation for the Age of Autonomous Agents.
               </p>
