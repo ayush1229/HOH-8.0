@@ -152,7 +152,7 @@ function PrizePool() {
 function SpecialCard({ award, icon, badge }) {
   return (
     <div
-      className="flex flex-col px-6 py-6"
+      className="flex flex-col px-6 py-6 hover-glow-card cursor-pointer transition-all duration-300"
       style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.07)' }}
     >
       <div className="flex items-start justify-between mb-4">

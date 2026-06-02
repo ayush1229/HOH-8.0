@@ -69,7 +69,7 @@ function App() {
                 REGISTER NOW
               </a>
               <a
-                href="#about"
+                href="#prize"
                 className="w-full sm:w-auto px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] border border-white/30 text-white transition-all duration-200 hover:border-white/60"
               >
                 VIEW TRACKS
@@ -114,7 +114,7 @@ function App() {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
               
               {/* Innovation (Top Left, wide) */}
-              <div data-fade-step style={{ transitionDelay: '0s' }} className="md:col-span-7 bg-[#111] rounded-sm p-8 flex flex-col justify-center text-white min-h-[220px]">
+              <div data-fade-step style={{ transitionDelay: '0s' }} className="md:col-span-7 bg-[#111] rounded-sm p-8 flex flex-col justify-center text-white min-h-[220px] hover-glow-card cursor-pointer border border-transparent">
                 <div className="flex items-center gap-3 mb-4">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" strokeWidth="2">
                     <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
@@ -127,7 +127,7 @@ function App() {
               </div>
 
               {/* Creativity (Top Right, tall) */}
-              <div data-fade-step style={{ transitionDelay: '0.15s' }} className="md:col-span-5 bg-[#111] rounded-sm p-8 flex flex-col text-white min-h-[280px]">
+              <div data-fade-step style={{ transitionDelay: '0.15s' }} className="md:col-span-5 bg-[#111] rounded-sm p-8 flex flex-col text-white min-h-[280px] hover-glow-card cursor-pointer border border-transparent">
                 <div className="mb-6 mt-2">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" strokeWidth="2">
                     <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
@@ -140,7 +140,7 @@ function App() {
               </div>
 
               {/* Collaboration (Bottom Left, tall) */}
-              <div data-fade-step style={{ transitionDelay: '0.3s' }} className="md:col-span-5 bg-[#111] rounded-sm p-8 flex flex-col text-white min-h-[280px]">
+              <div data-fade-step style={{ transitionDelay: '0.3s' }} className="md:col-span-5 bg-[#111] rounded-sm p-8 flex flex-col text-white min-h-[280px] hover-glow-card cursor-pointer border border-transparent">
                 <div className="mb-6 mt-2">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" strokeWidth="2">
                     <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
@@ -153,7 +153,7 @@ function App() {
               </div>
 
               {/* Future Impact (Bottom Right, wide) */}
-              <div data-fade-step style={{ transitionDelay: '0.45s' }} className="md:col-span-7 bg-[#111] rounded-sm p-8 flex flex-col justify-center text-white min-h-[220px]">
+              <div data-fade-step style={{ transitionDelay: '0.45s' }} className="md:col-span-7 bg-[#111] rounded-sm p-8 flex flex-col justify-center text-white min-h-[220px] hover-glow-card cursor-pointer border border-transparent">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-2xl font-bold">Future Impact</h3>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#93c5fd" strokeWidth="2">
