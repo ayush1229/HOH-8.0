@@ -68,7 +68,7 @@ function Hero() {
       <FloatingAgents mouseStrength={10} />
 
       <div className="relative z-10 w-full px-6 flex flex-col items-center justify-center text-center max-w-6xl mx-auto h-full my-auto">
-        <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-black tracking-tighter mb-3 reveal text-readable active flex flex-col items-center w-full" style={{ transitionDelay: '0.1s' }}>
+        <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-black tracking-tighter mb-3 pt-16 reveal text-readable active flex flex-col items-center w-full" style={{ transitionDelay: '0.1s' }}>
             <span className="block glow-text w-full text-center leading-tight">HACK ON</span>
             <span className="block text-zinc-500 w-full text-center leading-tight">HILLS <span className="text-white">8.0</span></span>
         </h1>
