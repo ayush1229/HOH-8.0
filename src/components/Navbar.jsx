@@ -76,7 +76,7 @@ export function StickyNavbar() {
         </nav>
 
         {/* Register button */}
-        <div className="hidden lg:block shrink-0" style={{ transform: "scale(0.85)", transformOrigin: "right center" }}>
+        <div className="hidden lg:block shrink-0">
           <DevfolioButton />
         </div>
 
@@ -120,9 +120,7 @@ export function StickyNavbar() {
               </a>
             ))}
             <div className="mt-2 flex justify-center" onClick={() => setOpenNav(false)}>
-              <div style={{ transform: "scale(0.85)" }}>
-                <DevfolioButton />
-              </div>
+              <DevfolioButton />
             </div>
           </div>
         </div>
