@@ -131,15 +131,48 @@ function App() {
             <p className="text-sm sm:text-base text-white/45 mb-16 max-w-xl leading-relaxed">
               Where ambitious ideas converge with cutting-edge technology to shape the autonomous future.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {ABOUT_CARDS.map((card, i) => (
-                <div key={i} data-fade-step className="rounded-sm p-6 sm:p-8"
-                  style={{ transitionDelay: `${i * 0.12}s`, background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.08)" }}>
-                  <div className="w-8 h-0.5 mb-5 bg-[#00e5ff]" />
-                  <h3 className="text-base font-bold text-white mb-3">{card.title}</h3>
-                  <p className="text-xs sm:text-sm text-white/40 leading-relaxed">{card.desc}</p>
-                </div>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <style>{`
+                @keyframes particleDrift {
+                  0% { transform: translateY(0) translateX(0); opacity: 0; }
+                  50% { transform: translateY(-15px) translateX(10px); opacity: 0.8; }
+                  100% { transform: translateY(-30px) translateX(-5px); opacity: 0; }
+                }
+                .particle {
+                  position: absolute;
+                  background: #00e5ff;
+                  border-radius: 50%;
+                  box-shadow: 0 0 8px 1px #00e5ff;
+                }
+              `}</style>
+              {ABOUT_CARDS.map((card, i) => {
+                const colSpanClass =
+                  i === 0 ? "md:col-span-2" :
+                  i === 1 ? "md:col-span-1" :
+                  i === 2 ? "md:col-span-1" : "md:col-span-2";
+                  
+                return (
+                  <div key={i} data-fade-step 
+                    className={`group relative rounded-2xl p-8 sm:p-10 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#00e5ff]/40 hover:shadow-[0_10px_40px_-10px_rgba(0,229,255,0.15)] overflow-hidden backdrop-blur-md ${colSpanClass}`}
+                    style={{ transitionDelay: `${i * 0.12}s`, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    
+                    {/* Hover Particles */}
+                    <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                      <div className="particle w-1 h-1 top-[80%] left-[20%]" style={{ animation: 'particleDrift 4s ease-in-out infinite' }} />
+                      <div className="particle w-1.5 h-1.5 top-[70%] left-[80%]" style={{ animation: 'particleDrift 5s ease-in-out 1s infinite' }} />
+                      <div className="particle w-[3px] h-[3px] top-[90%] left-[50%]" style={{ animation: 'particleDrift 3.5s ease-in-out 2s infinite' }} />
+                      <div className="particle w-1 h-1 top-[60%] left-[10%]" style={{ animation: 'particleDrift 6s ease-in-out 0.5s infinite' }} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#00e5ff]/[0.03] to-transparent" />
+                    </div>
+
+                    <div className="relative z-10">
+                      <div className="w-6 h-[2px] mb-6 bg-[#00e5ff] transition-all duration-300 group-hover:w-10 group-hover:shadow-[0_0_8px_#00e5ff]" />
+                      <h3 className="text-xl font-bold text-white mb-4 transition-colors duration-300 group-hover:text-[#00e5ff]">{card.title}</h3>
+                      <p className="text-sm text-white/50 leading-relaxed group-hover:text-white/70 transition-colors duration-300">{card.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -154,7 +187,10 @@ function App() {
 
         {/* ── SPONSORS ──────────────────────────────────────────── */}
         <section id="sponsors" data-fade className="py-24 px-4 sm:px-6 lg:px-10">
-          <div className="mx-auto max-w-[1100px]">
+          <div className="mx-auto max-w-[1100px] flex flex-col items-center">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#00e5ff] mb-6">
+              HACK ON HILLS 7.0
+            </p>
             <CenteredLabel>PARTNERS</CenteredLabel>
             <h2 className="text-center text-4xl sm:text-5xl font-bold text-white mb-4">
               Backed by the <span className={gradientClass}>Best</span>

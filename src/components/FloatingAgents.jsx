@@ -44,6 +44,24 @@ export default function FloatingAgents({
       y: "50%",
       depth: 0.025,
     },
+    {
+      type: "agent",
+      name: "Copilot",
+      status: "Generating code...",
+      color: "#a855f7",
+      x: "18%",
+      y: "85%",
+      depth: 0.035,
+    },
+    {
+      type: "agent",
+      name: "Devin",
+      status: "Resolving issues...",
+      color: "#f59e0b",
+      x: "82%",
+      y: "82%",
+      depth: 0.045,
+    },
   ],
 }) {
   const containerRef = useRef(null);
@@ -88,9 +106,9 @@ export default function FloatingAgents({
 
         .agent-card {
           position:absolute;
-          backdrop-filter:blur(12px);
-          background:rgba(255,255,255,0.015);
-          border:1px solid rgba(255,255,255,0.03);
+          backdrop-filter:blur(6px);
+          background:rgba(255,255,255,0.005);
+          border:1px solid rgba(255,255,255,0.015);
           border-radius:18px;
           padding:14px 18px;
           transition:
@@ -103,7 +121,8 @@ export default function FloatingAgents({
         }
 
         .agent-card:hover {
-          border-color:#00e5ff;
+          border-color:rgba(0,229,255,0.5);
+          background:rgba(0,229,255,0.02);
           box-shadow:
             0 0 30px rgba(0,229,255,.35),
             0 0 60px rgba(0,229,255,.15);
@@ -134,6 +153,24 @@ export default function FloatingAgents({
           margin-top:2px;
         }
 
+        .loading-dots {
+          display: inline-block;
+          width: 12px;
+          text-align: left;
+        }
+
+        .loading-dots::after {
+          content: '';
+          animation: loadingDots 1.5s infinite;
+        }
+        
+        @keyframes loadingDots {
+          0% { content: ''; }
+          25% { content: '.'; }
+          50% { content: '..'; }
+          75% { content: '...'; }
+        }
+
         .code-card {
           color:#00e5ff;
           font-size:13px;
@@ -141,85 +178,50 @@ export default function FloatingAgents({
           white-space:nowrap;
         }
 
-        .float1 {
-          animation: float1 9s ease-in-out infinite;
-        }
-
-        .float2 {
-          animation: float2 12s ease-in-out infinite;
-        }
-
-        .float3 {
-          animation: float3 8s ease-in-out infinite;
-        }
-
-        .float4 {
-          animation: float4 10s ease-in-out infinite;
-        }
-
-        .float5 {
-          animation: float5 11s ease-in-out infinite;
-        }
+        .float1 { animation: float1 9s ease-in-out infinite; }
+        .float2 { animation: float2 12s ease-in-out infinite; }
+        .float3 { animation: float3 8s ease-in-out infinite; }
+        .float4 { animation: float4 10s ease-in-out infinite; }
+        .float5 { animation: float5 11s ease-in-out infinite; }
+        .float6 { animation: float2 9.5s ease-in-out infinite reverse; }
+        .float7 { animation: float1 13s ease-in-out infinite reverse; }
+        .float8 { animation: float3 10.5s ease-in-out infinite reverse; }
 
         @keyframes float1 {
-          0%,100% {
-            translate:0 0;
-          }
-          50% {
-            translate:0 -22px;
-          }
+          0%,100% { translate:0 0; }
+          50% { translate:0 -22px; }
         }
 
         @keyframes float2 {
-          0%,100% {
-            translate:0 0;
-          }
-          25% {
-            translate:10px -12px;
-          }
-          75% {
-            translate:-10px -24px;
-          }
+          0%,100% { translate:0 0; }
+          25% { translate:10px -12px; }
+          75% { translate:-10px -24px; }
         }
 
         @keyframes float3 {
-          0%,100% {
-            translate:0 0;
-          }
-          50% {
-            translate:-16px -20px;
-          }
+          0%,100% { translate:0 0; }
+          50% { translate:-16px -20px; }
         }
 
         @keyframes float4 {
-          0%,100% {
-            translate:0 0;
-          }
-          50% {
-            translate:16px -16px;
-          }
+          0%,100% { translate:0 0; }
+          50% { translate:16px -16px; }
         }
 
         @keyframes float5 {
-          0%,100% {
-            translate:0 0;
-          }
-          50% {
-            translate:12px -30px;
-          }
+          0%,100% { translate:0 0; }
+          50% { translate:12px -30px; }
         }
       `}</style>
 
       <div
         ref={containerRef}
-        className="agent-container"
+        className="agent-container hidden md:block"
       >
         {agents.map((agent, i) => (
           <div
             key={i}
-            className={`agent-card float${
-              (i % 5) + 1
-            }`}
+            className={`agent-card float${(i % 8) + 1}`}
             data-depth={agent.depth || 0.03}
             style={{
               left: agent.x,
@@ -236,8 +238,7 @@ export default function FloatingAgents({
                   className="agent-dot"
                   style={{
                     background: agent.color,
-                    boxShadow:
-                      "0 0 12px " + agent.color,
+                    boxShadow: "0 0 12px " + agent.color,
                   }}
                 />
 
@@ -247,7 +248,8 @@ export default function FloatingAgents({
                   </div>
 
                   <div className="agent-status">
-                    {agent.status}
+                    {agent.status.replace('...', '')}
+                    {agent.status.includes('...') && <span className="loading-dots" />}
                   </div>
                 </div>
               </div>

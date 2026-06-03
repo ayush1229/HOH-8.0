@@ -68,7 +68,10 @@ function PrizePool() {
       <div className="mx-auto w-full max-w-[1100px]">
 
         {/* Total prize pool */}
-        <div className="text-center mb-20">
+        <div className="flex flex-col items-center justify-center text-center pt-24 pb-16">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#00e5ff] mb-6">
+            HACK ON HILLS 7.0
+          </p>
           <p
             className="text-[10px] font-semibold uppercase tracking-[0.32em] mb-5"
             style={{ color: "rgba(255,255,255,0.35)" }}
@@ -86,18 +89,19 @@ function PrizePool() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-14">
           <style>{`
             @keyframes prizeShine {
-              0% { background-position: -200% center; }
-              100% { background-position: 200% center; }
+              0% { background-position: 100% center; }
+              100% { background-position: 0% center; }
             }
             .prize-shine {
               background-image: linear-gradient(
                 120deg,
                 #00e5ff 35%,
-                #ffffff 50%,
+                #ffffff 45%,
+                #ffffff 55%,
                 #00e5ff 65%
               );
               background-size: 200% auto;
-              animation: prizeShine 7.5s linear infinite;
+              animation: prizeShine 8s ease-in-out infinite alternate;
               -webkit-background-clip: text;
               background-clip: text;
               -webkit-text-fill-color: transparent;
@@ -134,7 +138,9 @@ function PrizePool() {
                   {prize.position}
                 </p>
                 <p
-                  className="text-3xl sm:text-4xl font-bold mb-4 prize-shine"
+                  className={`text-3xl sm:text-4xl font-bold mb-4 ${
+                    i === 0 ? "text-[#00e5ff]" : "text-white"
+                  }`}
                 >
                   {prize.amount}
                 </p>
