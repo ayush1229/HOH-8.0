@@ -208,10 +208,10 @@ function App() {
                         <El key={i} href={s.link || undefined} target={s.link ? "_blank" : undefined}
                           rel={s.link ? "noopener noreferrer" : undefined}
                           className="flex items-center justify-center p-6 transition-all duration-200 hover:-translate-y-1"
-                          style={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, width: 180, minHeight: 100, cursor: s.link ? "pointer" : "default" }}
+                          style={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, width: 220, minHeight: 110, cursor: s.link ? "pointer" : "default" }}
                           onMouseEnter={(e) => { if (s.link) e.currentTarget.style.borderColor = "rgba(0,229,255,0.3)"; }}
                           onMouseLeave={(e) => { if (s.link) e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}>
-                          <img src={s.image || s.logo} alt={s.alt || s.name} className="max-h-12 max-w-[120px] object-contain" />
+                          <img src={s.image || s.logo} alt={s.alt || s.name} className="max-h-14 md:max-h-18 max-w-[200px] object-contain" />
                         </El>
                       );
                     })}
