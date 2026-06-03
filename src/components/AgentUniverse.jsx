@@ -86,18 +86,18 @@ function BackgroundScene({ density, textDensity, speed, mouseStrength, color, wo
     <>
       <group ref={groupRef}>
         {shapes.map((shape, i) => (
-          <InteractiveShape key={i} shape={shape} color={color} />
+          <InteractiveShape key={i} shape={shape} />
         ))}
       </group>
 
       {texts.map((item, i) => (
-        <InteractiveText key={i} item={item} color={color} speed={speed} mouseStrength={mouseStrength} />
+        <InteractiveText key={i} item={item} speed={speed} mouseStrength={mouseStrength} />
       ))}
     </>
   );
 }
 
-function InteractiveText({ item, color, speed, mouseStrength }) {
+function InteractiveText({ item, speed, mouseStrength }) {
   const textRef = useRef();
   const [hovered, setHovered] = useState(false);
   const { mouse } = useThree();
@@ -107,14 +107,10 @@ function InteractiveText({ item, color, speed, mouseStrength }) {
     const t = clock.elapsedTime;
     const scrollY = document.querySelector('main')?.scrollTop || 0;
     
-    // Slight drift + parallax
     textRef.current.position.y = item.y + Math.cos(t * speed + item.offset) * 2 + (scrollY * 0.005);
     textRef.current.position.x = item.x + mouse.x * mouseStrength * 1;
-    
-    // Look at camera
     textRef.current.lookAt(0, 0, 20);
     
-    // Scale up slightly on hover
     const targetScale = hovered ? 1.5 : 1;
     textRef.current.scale.lerp({ x: targetScale, y: targetScale, z: targetScale }, 0.1);
   });
@@ -124,25 +120,25 @@ function InteractiveText({ item, color, speed, mouseStrength }) {
       ref={textRef}
       position={[item.x, item.y, item.z]}
       fontSize={0.6}
-      color={hovered ? "#ffffff" : color}
+      color={hovered ? "#ffffff" : item.itemColor}
       anchorX="center"
       anchorY="middle"
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
-      fillOpacity={hovered ? 1 : 0.6}
+      fillOpacity={hovered ? 1 : 0.55}
     >
       {item.word}
     </Text>
   );
 }
 
-function InteractiveShape({ shape, color }) {
+function InteractiveShape({ shape }) {
   const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
+  const c = shape.itemColor;
 
   useFrame(() => {
     if (!meshRef.current) return;
-    // Scale logic
     const targetScale = hovered ? shape.scale * 1.5 : shape.scale;
     meshRef.current.scale.lerp({ x: targetScale, y: targetScale, z: targetScale }, 0.1);
   });
@@ -160,12 +156,12 @@ function InteractiveShape({ shape, color }) {
       {shape.type === 2 && <icosahedronGeometry args={[1]} />}
 
       <meshStandardMaterial
-        color={color}
-        emissive={hovered ? "#ffffff" : color}
-        emissiveIntensity={hovered ? 1.0 : 0.4}
+        color={hovered ? "#ffffff" : c}
+        emissive={c}
+        emissiveIntensity={hovered ? 1.2 : 0.5}
         wireframe
         transparent
-        opacity={0.15}
+        opacity={0.18}
       />
     </mesh>
   );

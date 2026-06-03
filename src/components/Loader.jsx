@@ -5,12 +5,10 @@ function Loader() {
   const [hide, setHide] = useState(false);
 
   useEffect(() => {
-    // Hide loader after 2 seconds
     const timer = setTimeout(() => {
       setLoading(false);
-      // Wait for opacity transition before hiding entirely
-      setTimeout(() => setHide(true), 800);
-    }, 2000);
+      setTimeout(() => setHide(true), 900);
+    }, 2200);
 
     return () => clearTimeout(timer);
   }, []);
@@ -18,19 +16,45 @@ function Loader() {
   if (hide) return null;
 
   return (
-    <div className={`loader ${!loading ? "hidden" : ""}`}>
-      <div className="font-mono text-sm text-zinc-400 mb-6 tracking-widest text-center px-4">
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "#020204",
+        zIndex: 99999,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        opacity: loading ? 1 : 0,
+        visibility: loading ? "visible" : "hidden",
+        transition: "opacity 0.9s ease, visibility 0.9s ease",
+        pointerEvents: loading ? "all" : "none",
+      }}
+    >
+      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "13px", color: "#71717a", marginBottom: "24px", letterSpacing: "0.3em", textAlign: "center" }}>
         INITIALIZING NEURAL NETWORK
       </div>
-      <div className="relative w-64 h-px bg-zinc-900 mx-auto">
+      <div style={{ position: "relative", width: "256px", height: "1px", background: "#18181b" }}>
         <div
-          className="absolute inset-y-0 left-0 bg-white"
-          style={{ width: "0%", animation: "loadBar 2s ease-in-out forwards" }}
-        ></div>
+          style={{
+            position: "absolute",
+            top: 0, bottom: 0, left: 0,
+            background: "#ffffff",
+            animation: "loadBar 2.2s ease-in-out forwards",
+          }}
+        />
       </div>
-      <div className="mt-4 font-mono text-xs text-zinc-500 text-center px-4">
+      <div style={{ marginTop: "16px", fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#52525b", textAlign: "center" }}>
         Loading agents...
       </div>
+      <style>{`
+        @keyframes loadBar {
+          0%   { width: 0%; }
+          50%  { width: 60%; }
+          100% { width: 100%; }
+        }
+      `}</style>
     </div>
   );
 }

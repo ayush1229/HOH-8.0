@@ -68,13 +68,6 @@ function Hero() {
       <FloatingAgents mouseStrength={10} />
 
       <div className="relative z-10 w-full px-6 flex flex-col items-center justify-center text-center max-w-6xl mx-auto h-full my-auto">
-        <div className="mb-4 reveal active">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 text-xs text-zinc-500 font-mono rounded-full">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                AGENTS ONLINE // v8.0
-            </span>
-        </div>
-
         <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-black tracking-tighter mb-3 reveal text-readable active flex flex-col items-center w-full" style={{ transitionDelay: '0.1s' }}>
             <span className="block glow-text w-full text-center leading-tight">HACK ON</span>
             <span className="block text-zinc-500 w-full text-center leading-tight">HILLS <span className="text-white">8.0</span></span>
