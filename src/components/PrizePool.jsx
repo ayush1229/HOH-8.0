@@ -95,11 +95,9 @@ function PrizePool() {
             .prize-shine {
               background-image: linear-gradient(
                 120deg,
-                #22c55e 15%,
-                #FFD700 35%,
-                #ffffff 50%,
-                #FFD700 65%,
-                #22c55e 85%
+                #22c55e 25%,
+                #FFD700 50%,
+                #22c55e 75%
               );
               background-size: 200% auto;
               animation: prizeShine 8s ease-in-out infinite alternate;
