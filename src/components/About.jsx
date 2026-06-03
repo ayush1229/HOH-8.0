@@ -1,0 +1,90 @@
+import React from "react";
+
+function SectionLabel({ children }) {
+  return (
+    <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 text-xs text-zinc-300 font-mono mb-8 rounded-full">
+      // {children}
+    </div>
+  );
+}
+
+function About() {
+  return (
+    <section id="about" className="py-40 relative">
+        <div className="max-w-7xl mx-auto px-6">
+            <div className="grid lg:grid-cols-2 gap-20 items-center">
+                <div className="reveal">
+                    <SectionLabel>ABOUT</SectionLabel>
+
+                    <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-10 font-display text-readable">
+                        The Genesis<br/>
+                        <span className="text-zinc-400">of Autonomy</span>
+                    </h2>
+
+                    <p className="text-zinc-500 text-xl leading-relaxed mb-8">
+                        Hack on Hills 8.0 is the premier 48-hour hackathon focused on the future of decentralized intelligence and autonomous systems. It is an immersive environment where developers, designers, and visionaries converge to build solutions that define the <span className="text-white">'Age of Autonomous Agents'</span>.
+                    </p>
+
+                    <div className="flex items-center gap-4 mb-10">
+                        <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-500/20"></div>
+                        <span className="text-sm text-zinc-300 font-mono">48-HOUR HACKATHON // NIT HAMIRPUR</span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-5">
+                        <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                            <div className="font-mono text-4xl font-bold text-white mb-2">48H</div>
+                            <div className="text-sm text-zinc-400 font-mono">OF PURE CODE</div>
+                        </div>
+                        <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                            <div className="font-mono text-4xl font-bold text-white mb-2">150K+</div>
+                            <div className="text-sm text-zinc-400 font-mono">PRIZE POOL</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="relative reveal">
+                    <div className="absolute -inset-10 bg-white/5 rounded-3xl blur-3xl"></div>
+                    <div className="relative bg-zinc-900/70 border border-white/10 rounded-2xl p-10 backdrop-blur-xl">
+                        <div className="font-mono text-sm text-zinc-400 mb-8">$ system.status --verbose</div>
+                        <div className="space-y-4 font-mono text-sm">
+                            <div className="flex items-center gap-4">
+                                <span className="text-green-500 font-bold">[OK]</span>
+                                <span className="text-zinc-400">Autonomous agents deployed</span>
+                                <span className="text-zinc-500 ml-auto">v2.4.1</span>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <span className="text-green-500 font-bold">[OK]</span>
+                                <span className="text-zinc-400">Decentralized intelligence active</span>
+                                <span className="text-zinc-500 ml-auto">v1.8.0</span>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <span className="text-green-500 font-bold">[OK]</span>
+                                <span className="text-zinc-400">Multi-agent orchestration ready</span>
+                                <span className="text-zinc-500 ml-auto">v3.0.2</span>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <span className="text-green-500 font-bold">[OK]</span>
+                                <span className="text-zinc-400">Agentic frameworks loaded</span>
+                                <span className="text-zinc-500 ml-auto">v4.1.0</span>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <span className="text-green-500 font-bold">[OK]</span>
+                                <span className="text-zinc-400">Collaboration protocols initialized</span>
+                                <span className="text-zinc-500 ml-auto">v1.2.5</span>
+                            </div>
+                        </div>
+                        <div className="mt-8 pt-8 border-t border-white/10">
+                            <div className="flex items-center justify-between text-xs text-zinc-400 font-mono">
+                                <span>System Status</span>
+                                <span className="text-green-400 font-bold">All Systems Operational</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  );
+}
+
+export default About;

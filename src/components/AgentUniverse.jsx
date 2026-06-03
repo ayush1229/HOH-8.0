@@ -35,6 +35,7 @@ function BackgroundScene({ density, textDensity, speed, mouseStrength, color, wo
   const { mouse } = useThree();
 
   const shapes = useMemo(() => {
+    const palette = [color, "cyan", "olive"];
     return Array.from({ length: density }, () => ({
       x: (Math.random() - 0.5) * 150,
       y: (Math.random() - 0.5) * 150,
@@ -45,18 +46,21 @@ function BackgroundScene({ density, textDensity, speed, mouseStrength, color, wo
       randomSpeedX: Math.random() * 0.5 + 0.5,
       randomSpeedY: Math.random() * 0.5 + 0.5,
       randomSpeedZ: Math.random() * 0.5 + 0.5,
+      itemColor: palette[Math.floor(Math.random() * palette.length)],
     }));
-  }, [density]);
+  }, [density, color]);
 
   const texts = useMemo(() => {
+    const palette = [color, "cyan", "olive"];
     return Array.from({ length: textDensity }, (_, i) => ({
       word: words[i % words.length],
       x: (Math.random() - 0.5) * 150,
       y: (Math.random() - 0.5) * 150,
       z: (Math.random() - 0.5) * 100,
-      offset: Math.random() * 100
+      offset: Math.random() * 100,
+      itemColor: palette[Math.floor(Math.random() * palette.length)],
     }));
-  }, [textDensity, words]);
+  }, [textDensity, words, color]);
 
   useFrame(({ clock }) => {
     const t = clock.elapsedTime;
