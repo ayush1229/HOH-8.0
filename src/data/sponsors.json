@@ -30,6 +30,7 @@
         "sponsors": [
           {
             "name": "devfolio",
+            "alt": "DEVFOLIO LOGO",
             "logo": "/sponsors/devfolio.svg",
             "image": "/sponsors/images/devfolioimg.webp",
             "link": "https://devfolio.co"
