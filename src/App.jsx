@@ -8,6 +8,7 @@ import Loader from "./components/Loader";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Protocols from "./components/Protocols";
+import AgenticDomains from "./components/AgenticDomains";
 import Sponsors from "./components/Sponsors";
 import FAQ from "./components/FAQ";
 import Register from "./components/Register";
@@ -61,6 +62,9 @@ function App() {
         <div className="divider"></div>
         
         <Protocols />
+        <div className="divider"></div>
+
+        <AgenticDomains />
         <div className="divider"></div>
         
         <section id="timeline" data-fade className="px-4 sm:px-6 lg:px-10">
