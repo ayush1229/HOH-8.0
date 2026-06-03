@@ -75,9 +75,7 @@ function App() {
   }, []);
 
   const faqs = faqData?.faqSection?.faqs ?? [];
-  const sponsors = (sponsorsData?.sponsorsSection?.categories ?? []).flatMap((cat) =>
-    (cat.sponsors ?? []).map((s) => ({ ...s }))
-  );
+  const sponsorsCategories = sponsorsData?.sponsorsSection?.categories ?? [];
 
   return (
     <div ref={containerRef} className="relative h-screen w-screen overflow-hidden max-w-[100vw]"
@@ -199,20 +197,27 @@ function App() {
             <p className="text-center text-sm text-white/40 mb-16 max-w-md mx-auto leading-relaxed">
               Industry leaders powering the next generation of builders.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              {sponsors.map((s, i) => {
-                const El = s.link ? "a" : "div";
-                return (
-                  <El key={i} href={s.link || undefined} target={s.link ? "_blank" : undefined}
-                    rel={s.link ? "noopener noreferrer" : undefined}
-                    className="flex items-center justify-center p-6 transition-all duration-200"
-                    style={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, width: 180, minHeight: 100, cursor: s.link ? "pointer" : "default" }}
-                    onMouseEnter={(e) => { if (s.link) e.currentTarget.style.borderColor = "rgba(0,229,255,0.3)"; }}
-                    onMouseLeave={(e) => { if (s.link) e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}>
-                    <img src={s.image || s.logo} alt={s.alt || s.name} className="max-h-12 max-w-[120px] object-contain" />
-                  </El>
-                );
-              })}
+            <div className="flex flex-col items-center gap-12 w-full mt-8">
+              {sponsorsCategories.map((category, catIdx) => (
+                <div key={catIdx} className="flex flex-col items-center w-full">
+                  <h3 className="text-xl font-semibold text-white/80 mb-6 tracking-widest">{category.tier}</h3>
+                  <div className="flex flex-wrap justify-center gap-4">
+                    {(category.sponsors ?? []).map((s, i) => {
+                      const El = s.link ? "a" : "div";
+                      return (
+                        <El key={i} href={s.link || undefined} target={s.link ? "_blank" : undefined}
+                          rel={s.link ? "noopener noreferrer" : undefined}
+                          className="flex items-center justify-center p-6 transition-all duration-200 hover:-translate-y-1"
+                          style={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, width: 180, minHeight: 100, cursor: s.link ? "pointer" : "default" }}
+                          onMouseEnter={(e) => { if (s.link) e.currentTarget.style.borderColor = "rgba(0,229,255,0.3)"; }}
+                          onMouseLeave={(e) => { if (s.link) e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}>
+                          <img src={s.image || s.logo} alt={s.alt || s.name} className="max-h-12 max-w-[120px] object-contain" />
+                        </El>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
