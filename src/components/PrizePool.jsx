@@ -70,7 +70,7 @@ function PrizePool() {
         {/* Total prize pool */}
         <div className="flex flex-col items-center justify-center text-center pt-24 pb-16">
           <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#c0c0c0] mb-6">
-            HACK ON HILLS 8.0
+            HACK ON HILLS 7.0
           </p>
           <p
             className="text-[10px] font-semibold uppercase tracking-[0.32em] mb-5"
