@@ -79,7 +79,7 @@ export default function TerminalStatus() {
           const isFuture    = !isCompleted && !isCurrent;
 
           return (
-            <div key={idx} className="flex items-center gap-4" style={{ opacity: isFuture ? 0 : 1 }}>
+            <div key={idx} className="flex items-center gap-4 overflow-hidden" style={{ opacity: isFuture ? 0 : 1 }}>
               <span
                 className="font-bold transition-all duration-200 shrink-0"
                 style={{
@@ -89,7 +89,8 @@ export default function TerminalStatus() {
               >
                 [OK]
               </span>
-              <span className="text-zinc-400">
+              {/* min-w-0 + whitespace-nowrap = clips at boundary, never wraps */}
+              <span className="text-zinc-400 min-w-0 overflow-hidden whitespace-nowrap flex-1">
                 {isCompleted ? line.text : isCurrent ? <>{typed}<span className="animate-pulse">_</span></> : line.text}
               </span>
               <span
@@ -105,18 +106,18 @@ export default function TerminalStatus() {
 
       {/* footer */}
       <div className="mt-8 pt-8 border-t border-white/10">
-        <div className="flex items-center justify-between text-xs text-zinc-400 font-nostalgia">
-          <span>System Status</span>
+        <div className="flex items-center justify-between flex-wrap gap-2 text-xs text-zinc-400 font-nostalgia">
+          <span className="shrink-0">System Status</span>
 
           {allDone ? (
             <span
-              className="text-green-400 font-bold"
+              className="text-green-400 font-bold shrink-0"
               style={{ textShadow: '0 0 4px #4ade8088' }}
             >
               All Systems Operational
             </span>
           ) : (
-            <span className="text-yellow-400">
+            <span className="text-yellow-400 shrink-0">
               Initializing System<span className="loading-dots" />
             </span>
           )}
