@@ -152,7 +152,18 @@ const TextType = ({
   const shouldHideCursor = hideCursorWhileTyping && (currentCharIndex < currentText.length || isDeleting);
   const textContent = (
     <>
-      <span className="inline" style={{ color: getCurrentTextColor() || 'inherit' }}>
+      <span 
+        className={`inline ${
+          getCurrentTextColor() === "#00e5ff"
+            ? "bg-gradient-to-r from-[#00e5ff] from-0% via-[#00e5ff] via-60% to-white to-100% bg-clip-text text-transparent"
+            : ""
+        }`}
+        style={
+          getCurrentTextColor() !== "#00e5ff"
+            ? { color: getCurrentTextColor() || 'inherit' }
+            : {}
+        }
+      >
         {displayedText}
       </span>
       {showCursor && (

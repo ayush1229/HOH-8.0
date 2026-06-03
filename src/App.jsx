@@ -1,309 +1,245 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StickyNavbar } from "./components/Navbar";
+import Footer from "./components/Footer";
 import TextType from "./components/TypeText";
 import Timeline from "./components/Timeline";
 import PrizePool from "./components/PrizePool";
+import AgentUniverse from "./components/AgentUniverse";
+import FloatingAgents from "./components/FloatingAgents";
 import sponsorsData from "./data/sponsors.json";
 import faqData from "./data/faq.json";
 
+/* ── Config ─────────────────────────────────────────────────────── */
+const AU_WORDS = [
+  "AUTONOMOUS", "AGENTS", "REASONING", "MULTI-AGENT",
+  "RAG", "TOOLS", "PLANNING", "MEMORY", "NEURAL",
+];
+
+const ABOUT_CARDS = [
+  { title: "Innovation",    desc: "Pushing the boundaries of autonomous systems. Explore new paradigms in agent architecture, multi-agent collaboration, and decentralized intelligence." },
+  { title: "Creativity",    desc: "Transforming ambitious ideas into impactful solutions that redefine possibility." },
+  { title: "Collaboration", desc: "Building the future together with diverse skills, perspectives, and shared vision." },
+  { title: "Future Impact", desc: "Creating solutions that drive meaningful change in the real world — systems that persist, adapt, and evolve beyond the hackathon." },
+];
+
+const gradientClass = "bg-gradient-to-r from-[#00e5ff] from-0% via-[#00e5ff] via-60% to-white to-100% bg-clip-text text-transparent inline-block";
+
+/* ── Sub-components ─────────────────────────────────────────────── */
+function CodeChip({ children, style }) {
+  return (
+    <div
+      className="absolute hidden lg:block font-mono text-xs px-3 py-2 rounded-lg transition-all duration-300 hover:scale-110 cursor-default"
+      style={{ background: "rgba(10,10,10,0.75)", border: "1px solid rgba(255,255,255,0.08)", zIndex: 5, ...style }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function SectionLabel({ children }) {
+  return (
+    <div className="flex items-center gap-3 mb-6">
+      <div className="w-6 h-px bg-[#00e5ff]" />
+      <span className={`text-[10px] font-semibold uppercase tracking-[0.28em] text-[#00e5ff]`}>
+        {children}
+      </span>
+    </div>
+  );
+}
+
+function CenteredLabel({ children }) {
+  return (
+    <div className="flex items-center justify-center gap-3 mb-6">
+      <div className="w-6 h-px bg-[#00e5ff]" />
+      <span className={`text-[10px] font-semibold uppercase tracking-[0.28em] text-[#00e5ff]`}>
+        {children}
+      </span>
+    </div>
+  );
+}
+
+/* ── Main App ───────────────────────────────────────────────────── */
 function App() {
+  const [openFaq, setOpenFaq] = useState(null);
+  const containerRef = React.useRef();
+
   useEffect(() => {
-    const scroller = document.querySelector('main');
-    const els = document.querySelectorAll('[data-fade]');
+    const scroller = document.querySelector("main");
+    const els = document.querySelectorAll("[data-fade]");
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
-      { root: scroller, threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
+      { root: scroller, threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
-    els.forEach(el => observer.observe(el));
+    els.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
-
+  const faqs = faqData?.faqSection?.faqs ?? [];
+  const sponsors = (sponsorsData?.sponsorsSection?.categories ?? []).flatMap((cat) =>
+    (cat.sponsors ?? []).map((s) => ({ ...s }))
+  );
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden max-w-[100vw]" style={{ backgroundColor: '#0a0a0a', fontFamily: "'SpaceGrotesk', sans-serif" }}>
-      <div className="relative z-50">
-        <StickyNavbar />
-      </div>
+    <div ref={containerRef} className="relative h-screen w-screen overflow-hidden max-w-[100vw]"
+      style={{ backgroundColor: "transparent", fontFamily: "'SpaceGrotesk', sans-serif" }}>
 
-      <main className="relative z-10 h-screen overflow-y-auto scroll-smooth no-scrollbar" style={{ fontFamily: "'SpaceGrotesk', sans-serif" }}>
-        {/* Hero / Landing Section */}
-        <section id="home" className="relative flex min-h-screen flex-col items-center justify-center px-4 text-center">
-          {/* Glowing bordered rectangle */}
-          <div
-            className="relative flex flex-col items-center justify-center px-8 py-14 sm:px-16 sm:py-16 w-full max-w-[580px] mx-auto"
-            style={{
-              border: '1px solid rgba(255,255,255,0.12)',
-              boxShadow: '0 0 40px rgba(0,229,255,0.06), 0 0 80px rgba(0,229,255,0.03), inset 0 0 40px rgba(0,229,255,0.02)',
-              background: 'rgba(255,255,255,0.02)',
-            }}
-          >
-            {/* Badge */}
-            <div className="mb-6 inline-flex items-center border border-[#00e5ff]/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#00e5ff]">
+      {/* 3-D Background */}
+      <AgentUniverse eventSource={containerRef} density={150} textDensity={200} speed={0.5} mouseStrength={0.5} color="#00e5ff" words={AU_WORDS} />
+
+      {/* Navbar */}
+      <div className="relative z-50"><StickyNavbar /></div>
+
+      <main className="relative z-10 h-screen overflow-y-auto scroll-smooth no-scrollbar"
+        style={{ fontFamily: "'SpaceGrotesk', sans-serif" }}>
+
+        {/* ── HERO ──────────────────────────────────────────────── */}
+        <section id="home" className="relative flex min-h-screen flex-col items-center justify-center px-4 text-center overflow-hidden">
+          <FloatingAgents mouseStrength={10} />
+          <CodeChip style={{ top: "46%", left: "6%", color: "#00e5ff" }}>agent.execute(task)</CodeChip>
+          <CodeChip style={{ top: "40%", right: "6%", color: "rgba(0,229,255,0.55)" }}>agent_exec(task)</CodeChip>
+
+          <div className="relative flex flex-col items-center max-w-3xl mx-auto" style={{ zIndex: 6 }}>
+            <p className="mb-6 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#00e5ff]">
               HACK ON HILLS 8.0
-            </div>
-
-            {/* Main heading via TextType */}
-            <TextType
-              text={[
-                "The Age of Autonomous Agents",
-                "The Future of Decentralized Intelligence",
-                "Build Beyond Boundaries"
-              ]}
-              className="text-3xl font-bold leading-snug text-white sm:text-4xl md:text-5xl"
-              showCursor={true}
-              typingSpeed={40}
-            />
-
-            {/* Subtitle */}
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/50 sm:text-base">
-              Join the vanguard of decentralised intelligence. Build the future where AI doesn't just assist, it acts.
             </p>
-
-            {/* CTA Buttons */}
+            <TextType
+              text={["The Age of Autonomous Agents", "The Future of Decentralized Intelligence", "Build Beyond Boundaries"]}
+              className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight"
+              textColors={["#00e5ff", "#00e5ff", "#00e5ff"]}
+              showCursor typingSpeed={42} pauseDuration={2200} deletingSpeed={28}
+            />
+            <p className="mt-6 max-w-lg text-sm sm:text-base leading-relaxed text-white/50">
+              A 48-hour innovation experience where builders create autonomous systems,
+              intelligent agents, and the future of human-AI collaboration.
+            </p>
             <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
-              <a
-                href="#about"
-                className="w-full sm:w-auto px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] bg-white text-black transition-all duration-200 hover:bg-white/90"
-              >
-                REGISTER NOW
-              </a>
-              <a
-                href="#prize"
-                className="w-full sm:w-auto px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] border border-white/30 text-white transition-all duration-200 hover:border-white/60"
-              >
-                VIEW TRACKS
-              </a>
+              <a href="#about" className="px-8 py-3.5 rounded-full text-sm font-bold hover:opacity-85 transition-opacity"
+                style={{ background: "#00e5ff", color: "#000" }}>Register Now</a>
+              <a href="#prizes" className="px-8 py-3.5 rounded-full text-sm font-bold border text-white hover:border-white/60 transition-colors"
+                style={{ borderColor: "rgba(255,255,255,0.28)" }}>View Tracks</a>
             </div>
           </div>
         </section>
 
-        <section id="about" data-fade className="py-24 px-4 sm:px-6 lg:px-10">
+        {/* ── ABOUT ─────────────────────────────────────────────── */}
+        <section id="about" data-fade className="py-24 px-4 sm:px-6 lg:px-12">
           <div className="mx-auto max-w-[1100px]">
-            {/* Header Area */}
-            <div className="flex flex-col items-start mb-20 text-left">
-              {/* Badge */}
-              <div className="bg-[#9ca3af]/30 text-[#00e5ff] text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full flex items-center gap-2 mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00e5ff]"></span>
-                System Initialization
-              </div>
-
-              {/* Title */}
-              <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-10 text-white">
-                The Genesis of{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#93c5fd] to-[#c4b5fd]">
-                  Autonomy
-                </span>
-              </h2>
-
-              {/* Paragraph */}
-              <div className="border-l-2 border-white/10 pl-6 text-left max-w-3xl self-start">
-                <p className="text-[#9ca3af] text-sm sm:text-base leading-relaxed">
-                  Hack on Hills 8.0 is the premier 48-hour hackathon focused on the future of decentralized intelligence and autonomous systems. It is an immersive environment where developers, designers, and visionaries converge to build solutions that define the 'Age of Autonomous Agents'.
-                </p>
-              </div>
-            </div>
-
-            {/* Divider */}
-            <div className="flex flex-col items-end mb-12">
-              <span className="text-[10px] font-semibold text-[#9ca3af] tracking-widest mb-2 uppercase">// V.8.0.PROTOCOLS</span>
-              <div className="w-full h-px bg-white/10"></div>
-            </div>
-
-            {/* Asymmetric Bento Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-              
-              {/* Innovation (Top Left, wide) */}
-              <div data-fade-step style={{ transitionDelay: '0s' }} className="md:col-span-7 bg-[#111] rounded-sm p-8 flex flex-col justify-center text-white min-h-[220px] hover-glow-card cursor-pointer border border-transparent">
-                <div className="flex items-center gap-3 mb-4">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
-                  </svg>
-                  <h3 className="text-2xl font-bold">Innovation</h3>
+            <SectionLabel>ABOUT</SectionLabel>
+            <h2 className={`text-4xl sm:text-5xl md:text-6xl font-bold mb-5 ${gradientClass}`}>
+              The Genesis of Autonomy
+            </h2>
+            <p className="text-sm sm:text-base text-white/45 mb-16 max-w-xl leading-relaxed">
+              Where ambitious ideas converge with cutting-edge technology to shape the autonomous future.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {ABOUT_CARDS.map((card, i) => (
+                <div key={i} data-fade-step className="rounded-sm p-6 sm:p-8"
+                  style={{ transitionDelay: `${i * 0.12}s`, background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <div className="w-8 h-0.5 mb-5 bg-[#00e5ff]" />
+                  <h3 className="text-base font-bold text-white mb-3">{card.title}</h3>
+                  <p className="text-xs sm:text-sm text-white/40 leading-relaxed">{card.desc}</p>
                 </div>
-                <p className="text-xs text-white/60 leading-relaxed max-w-md">
-                  Pushing the boundaries of autonomous systems. We aim to encourage participants to explore new ideas, technologies, and approaches that redefine how intelligent agents can perceive, reason, and act independently in the real world.
-                </p>
-              </div>
-
-              {/* Creativity (Top Right, tall) */}
-              <div data-fade-step style={{ transitionDelay: '0.15s' }} className="md:col-span-5 bg-[#111] rounded-sm p-8 flex flex-col text-white min-h-[280px] hover-glow-card cursor-pointer border border-transparent">
-                <div className="mb-6 mt-2">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" strokeWidth="2">
-                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Creativity</h3>
-                <p className="text-xs text-white/60 leading-relaxed">
-                  Transforming ambitious ideas into impactful solutions. We believe the future of autonomous agents will be shaped by creative thinking. Participants are encouraged to design unique experiences, novel workflows, and unconventional applications that challenge traditional problem-solving.
-                </p>
-              </div>
-
-              {/* Collaboration (Bottom Left, tall) */}
-              <div data-fade-step style={{ transitionDelay: '0.3s' }} className="md:col-span-5 bg-[#111] rounded-sm p-8 flex flex-col text-white min-h-[280px] hover-glow-card cursor-pointer border border-transparent">
-                <div className="mb-6 mt-2">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" strokeWidth="2">
-                    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Collaboration</h3>
-                <p className="text-xs text-white/60 leading-relaxed">
-                  Building the future together. Great breakthroughs emerge when diverse skills come together. We foster an environment where developers, designers, researchers, and innovators collaborate to create intelligent systems that are greater than the sum of their parts.
-                </p>
-              </div>
-
-              {/* Future Impact (Bottom Right, wide) */}
-              <div data-fade-step style={{ transitionDelay: '0.45s' }} className="md:col-span-7 bg-[#111] rounded-sm p-8 flex flex-col justify-center text-white min-h-[220px] hover-glow-card cursor-pointer border border-transparent">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-bold">Future Impact</h3>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#93c5fd" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/>
-                  </svg>
-                </div>
-                <p className="text-xs text-white/60 leading-relaxed max-w-md">
-                  Creating solutions for tomorrow's world. Our goal is to inspire projects that extend beyond the hackathon—autonomous agents capable of driving meaningful change in industries, communities, and everyday life, shaping the next era of technology.
-                </p>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        <section data-fade className="flex items-center px-4 py-0 sm:px-6 lg:px-10">
-          <Timeline />
-        </section>
-        <PrizePool />
-
-        <section id="sponsors" data-fade className="flex min-h-screen items-center px-4 pb-10 pt-24 sm:px-6 lg:px-10">
-          <div className="mx-auto w-full max-w-[1100px]">
-            <div className="mb-16 text-center max-w-2xl mx-auto flex flex-col items-center">
-              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6" style={{ fontFamily: "'SpaceGrotesk', sans-serif" }}>
-                HOH 7.0 SPONSORS
-              </h2>
-              <p className="text-xs tracking-wide text-white/50 leading-relaxed uppercase">
-                HOH is made possible by the generous support of our sponsors. These visionary organizations are building the foundation for the Age of Autonomous Agents.
-              </p>
-            </div>
-            <div className="flex flex-col gap-12 py-6">
-              {(() => {
-                const categories = sponsorsData?.sponsorsSection?.categories ?? [];
-                return categories.map((cat, idx) => (
-                  <div key={`tier-${idx}`} data-fade-step style={{ transitionDelay: `${idx * 0.15}s` }} className="flex flex-col gap-0 items-center w-full">
-                    <div className="flex items-center justify-center bg-[#050505] w-full text-white py-2 mb-4">
-                      <h2 className="text-[10px] font-bold uppercase tracking-[0.25em]" style={{ color: idx === 0 ? '#00e5ff' : 'white' }}>{cat.tier}</h2>
-                    </div>
-                    
-                    <div className="flex flex-wrap justify-center gap-4 w-full">
-                      {(cat.sponsors || []).map((s, sidx) => {
-                        const CardWrapper = s.link ? 'a' : 'div';
-                        return (
-                          <CardWrapper
-                            key={`s-${idx}-${sidx}`}
-                            href={s.link || undefined}
-                            target={s.link ? "_blank" : undefined}
-                            rel={s.link ? "noopener noreferrer" : undefined}
-                            className={`flex items-center justify-center bg-[#050505] p-8 w-full sm:w-[48%] md:w-[31%] min-h-[140px] ${s.link ? 'hover:bg-[#0a0a0a] transition-colors duration-200 cursor-pointer' : ''}`}
-                          >
-                            <img src={s.image || s.logo} alt={s.name} className="max-h-16 object-contain mx-auto" />
-                          </CardWrapper>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ));
-              })()}
-            </div>
-            {/* FAQ Section */}
-            <section id="faq" data-fade className="mx-auto w-full max-w-[900px] py-20">
-              {/* Badge */}
-              <div className="flex justify-center mb-6">
-                <span className="border border-[#00e5ff]/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#00e5ff]">
-                  SYSTEM_QUERY
-                </span>
-              </div>
-
-              {/* Title */}
-              <h2 className="text-center text-4xl sm:text-5xl font-bold text-white leading-tight mb-4">
-                Frequently Asked<br />
-                <span style={{ color: '#00e5ff' }}>Questions</span>
-              </h2>
-
-              {/* Subtitle */}
-              <p className="text-center text-sm text-white/40 mb-14 max-w-md mx-auto leading-relaxed">
-                {faqData?.faqSection?.description} Initialize your knowledge base before entering the autonomous arena.
-              </p>
-
-              {/* FAQs grid */}
-              {(() => {
-                const faqs = faqData?.faqSection?.faqs ?? [];
-                const first = faqs[0];
-                const rest = faqs.slice(1);
-                return (
-                  <>
-                    {/* First item — full width */}
-                    {first && (
-                      <div className="border-t border-white/10 py-8 mb-2">
-                        <div className="flex items-start justify-between gap-4">
-                          <h3 className="text-base font-semibold text-white mb-3">{first.question}</h3>
-                          <span className="text-white/20 text-xs mt-1 shrink-0">⊞</span>
-                        </div>
-                        <p className="text-sm text-white/40 leading-relaxed max-w-2xl">{first.answer}</p>
-                      </div>
-                    )}
-
-                    {/* Rest — 2-column grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-                      {rest.map((faq, i) => (
-                        <div
-                          key={i}
-                          className="border-t border-white/10 py-8 md:odd:pr-10 md:even:pl-10"
-                        >
-                          <div className="flex items-start justify-between gap-4 mb-3">
-                            <h3 className="text-sm font-semibold text-white">{faq.question}</h3>
-                            <span className="text-white/20 text-xs mt-0.5 shrink-0">⊞</span>
-                          </div>
-                          <p className="text-xs text-white/40 leading-relaxed">{faq.answer}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                );
-              })()}
-
-              {/* Still have queries */}
-              <div id="contact" className="mt-20 flex flex-col items-center text-center border-t border-white/10 pt-16">
-                <h3 className="text-2xl font-semibold text-white mb-3">Still have queries?</h3>
-                <p className="text-sm text-white/40 max-w-xs leading-relaxed mb-8">
-                  Connect directly with our core maintainers via the community channels for realtime assistance.
-                </p>
-                <a
-                  href="https://discord.gg/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] border border-white/30 text-white transition-all duration-200 hover:border-white/60"
-                >
-                  JOIN DISCORD
-                </a>
-              </div>
-            </section>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="border-t border-white/10 bg-[#0a0a0a] px-6 py-10">
-          <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-6 sm:flex-row">
-            <span className="text-sm font-semibold text-white">Hack on Hills 8.0</span>
-            <div className="flex gap-6 text-xs text-white/40">
-              {['Twitter', 'Discord', 'Github', 'LinkedIn'].map(link => (
-                <a key={link} href="#" className="hover:text-white transition-colors duration-200">{link}</a>
               ))}
             </div>
           </div>
-          <div className="mx-auto mt-6 max-w-[1400px] text-xs text-white/20">
-            © 2026 Hack on Hills 8.0 · The Age of Autonomous Agents
+        </section>
+
+        {/* ── TIMELINE ──────────────────────────────────────────── */}
+        <section id="timeline" data-fade className="px-4 sm:px-6 lg:px-10">
+          <Timeline />
+        </section>
+
+        {/* ── PRIZES ────────────────────────────────────────────── */}
+        <PrizePool />
+
+        {/* ── SPONSORS ──────────────────────────────────────────── */}
+        <section id="sponsors" data-fade className="py-24 px-4 sm:px-6 lg:px-10">
+          <div className="mx-auto max-w-[1100px]">
+            <CenteredLabel>PARTNERS</CenteredLabel>
+            <h2 className="text-center text-4xl sm:text-5xl font-bold text-white mb-4">
+              Backed by the <span className={gradientClass}>Best</span>
+            </h2>
+            <p className="text-center text-sm text-white/40 mb-16 max-w-md mx-auto leading-relaxed">
+              Industry leaders powering the next generation of builders.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              {sponsors.map((s, i) => {
+                const El = s.link ? "a" : "div";
+                return (
+                  <El key={i} href={s.link || undefined} target={s.link ? "_blank" : undefined}
+                    rel={s.link ? "noopener noreferrer" : undefined}
+                    className="flex items-center justify-center p-6 transition-all duration-200"
+                    style={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, width: 180, minHeight: 100, cursor: s.link ? "pointer" : "default" }}
+                    onMouseEnter={(e) => { if (s.link) e.currentTarget.style.borderColor = "rgba(0,229,255,0.3)"; }}
+                    onMouseLeave={(e) => { if (s.link) e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; }}>
+                    <img src={s.image || s.logo} alt={s.name} className="max-h-12 max-w-[120px] object-contain" />
+                  </El>
+                );
+              })}
+            </div>
           </div>
-        </footer>
+        </section>
+
+        {/* ── FAQ ───────────────────────────────────────────────── */}
+        <section id="faq" data-fade className="py-24 px-4 sm:px-6 lg:px-10">
+          <div className="mx-auto max-w-[820px]">
+            <CenteredLabel>FAQ</CenteredLabel>
+            <h2 className={`text-center text-4xl sm:text-5xl font-bold mb-4 ${gradientClass}`}>
+              Frequently Asked Questions
+            </h2>
+            <p className="text-center text-sm text-white/40 mb-14 leading-relaxed">
+              Get all the answers you need about HOH 8.0.
+            </p>
+
+            {/* First Q — full width */}
+            {faqs[0] && (
+              <FaqItem faq={faqs[0]} idx={0} openFaq={openFaq} setOpenFaq={setOpenFaq} />
+            )}
+
+            {/* Rest — 2-column grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+              {faqs.slice(1).map((faq, i) => (
+                <FaqItem key={i + 1} faq={faq} idx={i + 1} openFaq={openFaq} setOpenFaq={setOpenFaq} />
+              ))}
+            </div>
+
+            {/* Contact CTA */}
+            <div id="contact" className="mt-20 text-center border-t pt-16" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+              <h3 className="text-xl font-semibold text-white mb-3">Still have queries?</h3>
+              <p className="text-sm text-white/40 max-w-xs mx-auto leading-relaxed mb-8">
+                Connect directly with our core maintainers via community channels for real-time assistance.
+              </p>
+              <a href="https://discord.gg/" target="_blank" rel="noopener noreferrer"
+                className="inline-flex px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] border text-white hover:border-white/60 transition-colors"
+                style={{ borderColor: "rgba(255,255,255,0.3)" }}>
+                JOIN DISCORD
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ── FOOTER ────────────────────────────────────────────── */}
+        <Footer />
+
       </main>
+    </div>
+  );
+}
+
+/* ── FAQ accordion item ─────────────────────────────────────────── */
+function FaqItem({ faq, idx, openFaq, setOpenFaq }) {
+  const isOpen = openFaq === idx;
+  return (
+    <div className="border-t cursor-pointer select-none" style={{ borderColor: "rgba(255,255,255,0.1)" }}
+      onClick={() => setOpenFaq(isOpen ? null : idx)}>
+      <div className="flex items-center justify-between py-5 gap-6">
+        <h3 className="text-sm font-semibold text-white leading-snug">{faq.question}</h3>
+        <span className="text-xl text-white/35 shrink-0 transition-transform duration-200"
+          style={{ transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}>+</span>
+      </div>
+      {isOpen && (
+        <p className="pb-6 text-sm text-white/40 leading-relaxed">{faq.answer}</p>
+      )}
     </div>
   );
 }

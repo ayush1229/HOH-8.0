@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../assets/logo.webp";
 
 const HACKATHON_SLUG = "YOUR-HACKATHON-SLUG";
@@ -15,14 +15,12 @@ function DevfolioButton() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center" style={{ minHeight: 44 }}>
-      <div
-        className="apply-button"
-        data-hackathon-slug={HACKATHON_SLUG}
-        data-button-theme="light"
-        style={{ height: 44, width: 312 }}
-      />
-    </div>
+    <div
+      className="apply-button"
+      data-hackathon-slug={HACKATHON_SLUG}
+      data-button-theme="light"
+      style={{ height: 44, width: 312 }}
+    />
   );
 }
 
@@ -37,62 +35,104 @@ export function StickyNavbar() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const navItems = ["About", "Prize", "Sponsors", "FAQ", "Contact", "Team"];
+  const navItems = ["Home", "About", "Timeline", "Prizes", "Sponsors", "FAQ"];
 
   return (
-    <header className="fixed left-0 top-0 z-40 w-full border-b border-white/10 bg-[#0a0a0a]/90 backdrop-blur-lg" style={{ fontFamily: "'SpaceGrotesk', sans-serif" }}>
-      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header
+      className="fixed top-5 left-1/2 z-50"
+      style={{ transform: "translateX(-50%)", fontFamily: "'SpaceGrotesk', sans-serif", whiteSpace: "nowrap" }}
+    >
+      {/* Pill navbar */}
+      <div
+        className="flex items-center gap-5 px-5 py-2.5 rounded-full"
+        style={{
+          background: "rgba(10,10,10,0.88)",
+          border: "1px solid rgba(255,255,255,0.12)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+        }}
+      >
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-3 text-xl font-semibold tracking-wide text-white">
-          <img src={logo} alt="HOH 8.0 Logo" className="h-10 w-10 object-contain" />
+        <a href="#home" className="flex items-center gap-2 text-sm font-semibold text-white shrink-0">
+          <span className="w-2 h-2 rounded-full bg-[#00e5ff] shrink-0" />
+          <img src={logo} alt="HOH 8.0" className="h-5 w-5 object-contain" />
           <span>HOH 8.0</span>
         </a>
 
+        {/* Divider */}
+        <div className="w-px h-4 bg-white/15 hidden lg:block shrink-0" />
+
         {/* Desktop nav links */}
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden lg:flex items-center gap-5">
           {navItems.map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="text-base text-white/85 transition hover:text-white">
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="text-sm text-white/60 transition-colors duration-150 hover:text-white"
+            >
               {item}
             </a>
           ))}
         </nav>
 
-        {/* Apply button — rendered ONCE here, hidden on mobile via CSS */}
-        <div className="hidden lg:flex items-center shrink-0">
-          <DevfolioButton />
-        </div>
+        {/* Register button */}
+        <a
+          href="#about"
+          className="hidden lg:inline-flex items-center px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-200 hover:opacity-85 shrink-0"
+          style={{ background: "#00e5ff", color: "#000" }}
+        >
+          Register
+        </a>
 
         {/* Mobile hamburger */}
         <button
-          className="inline-flex items-center justify-center rounded-md p-2 text-white/80 hover:bg-white/10 hover:text-white lg:hidden"
+          className="inline-flex items-center justify-center rounded-full p-1.5 text-white/70 hover:bg-white/10 lg:hidden"
           onClick={() => setOpenNav((v) => !v)}
-          aria-label="Toggle navigation menu"
+          aria-label="Toggle navigation"
         >
           {openNav ? (
-            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M6 18L18 6M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           ) : (
-            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           )}
         </button>
       </div>
+
       {/* Mobile drawer */}
       {openNav && (
-        <nav className="border-t border-white/10 px-4 py-3 lg:hidden">
+        <div
+          className="mt-2 rounded-2xl px-5 py-4 lg:hidden"
+          style={{
+            background: "rgba(10,10,10,0.95)",
+            border: "1px solid rgba(255,255,255,0.12)",
+            backdropFilter: "blur(20px)",
+          }}
+        >
           <div className="flex flex-col gap-3">
             {navItems.map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="text-base text-white/85 hover:text-white" onClick={() => setOpenNav(false)}>
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="text-sm text-white/70 hover:text-white transition-colors"
+                onClick={() => setOpenNav(false)}
+              >
                 {item}
               </a>
             ))}
-            <div className="mt-2 flex justify-start">
-              <DevfolioButton />
-            </div>
+            <a
+              href="#about"
+              className="mt-2 flex items-center justify-center px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest"
+              style={{ background: "#00e5ff", color: "#000" }}
+              onClick={() => setOpenNav(false)}
+            >
+              Register
+            </a>
           </div>
-        </nav>
+        </div>
       )}
     </header>
   );
