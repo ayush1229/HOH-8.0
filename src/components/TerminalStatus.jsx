@@ -93,16 +93,26 @@ export default function TerminalStatus() {
               </span>
 
               {/* Full text always rendered — chars beyond 'revealed' are just invisible */}
-              <span className="text-zinc-400 flex-1 min-w-0">
-                {line.text.split('').map((ch, ci) => (
-                  <span key={ci} style={{ color: ci < revealed ? undefined : 'transparent' }}>
-                    {ch}
-                  </span>
-                ))}
-                {/* blinking cursor while typing */}
-                {!ok && revealed > 0 && revealed < line.text.length && (
-                  <span className="animate-pulse" style={{ color: '#71717a' }}>_</span>
-                )}
+              <span className="text-zinc-400 flex-1 min-w-0 break-words leading-relaxed">
+                {line.text.split('').map((ch, ci) => {
+                  let displayChar = ch;
+                  let color = 'transparent';
+                  let spanClass = '';
+
+                  if (ci < revealed) {
+                    color = undefined;
+                  } else if (ci === revealed && !ok && revealed > 0) {
+                    displayChar = '_';
+                    color = '#71717a';
+                    spanClass = 'animate-pulse';
+                  }
+
+                  return (
+                    <span key={ci} className={spanClass} style={{ color }}>
+                      {displayChar}
+                    </span>
+                  );
+                })}
               </span>
 
               {/* version number */}
