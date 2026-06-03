@@ -71,41 +71,36 @@ export default function TerminalStatus() {
       {/* header — same as original */}
       <div className="font-mono text-sm text-zinc-400 mb-8">$ system.status --verbose</div>
 
-      {/* lines — same font-mono text-sm, space-y-4 as original */}
+      {/* lines — always render all 5 to keep height fixed */}
       <div className="space-y-4 font-mono text-sm">
+        {LINES.map((line, idx) => {
+          const isCompleted = done.includes(idx);
+          const isCurrent   = !allDone && idx === lineIdx;
+          const isFuture    = !isCompleted && !isCurrent;
 
-        {/* completed lines */}
-        {done.map(idx => (
-          <div key={idx} className="flex items-center gap-4">
-            <span className="text-green-500 font-bold" style={{ textShadow: '0 0 6px #22c55e' }}>[OK]</span>
-            <span className="text-zinc-400">{LINES[idx].text}</span>
-            <span className="text-zinc-500 ml-auto">{LINES[idx].version}</span>
-          </div>
-        ))}
-
-        {/* current typing line */}
-        {!allDone && lineIdx < LINES.length && (
-          <div className="flex items-center gap-4">
-            <span
-              className="font-bold transition-all duration-200"
-              style={{
-                color: showOk ? '#22c55e' : 'transparent',
-                textShadow: showOk ? '0 0 6px #22c55e' : 'none',
-              }}
-            >
-              [OK]
-            </span>
-            <span className="text-zinc-400">
-              {typed}<span className="animate-pulse">_</span>
-            </span>
-            <span
-              className="text-zinc-500 ml-auto transition-opacity duration-200"
-              style={{ opacity: showOk ? 1 : 0 }}
-            >
-              {LINES[lineIdx].version}
-            </span>
-          </div>
-        )}
+          return (
+            <div key={idx} className="flex items-center gap-4" style={{ opacity: isFuture ? 0 : 1 }}>
+              <span
+                className="font-bold transition-all duration-200 shrink-0"
+                style={{
+                  color: isCompleted || (isCurrent && showOk) ? '#22c55e' : 'transparent',
+                  textShadow: isCompleted || (isCurrent && showOk) ? '0 0 6px #22c55e' : 'none',
+                }}
+              >
+                [OK]
+              </span>
+              <span className="text-zinc-400">
+                {isCompleted ? line.text : isCurrent ? <>{typed}<span className="animate-pulse">_</span></> : line.text}
+              </span>
+              <span
+                className="text-zinc-500 ml-auto transition-opacity duration-200 shrink-0"
+                style={{ opacity: isCompleted || (isCurrent && showOk) ? 1 : 0 }}
+              >
+                {line.version}
+              </span>
+            </div>
+          );
+        })}
       </div>
 
       {/* footer — same as original */}
