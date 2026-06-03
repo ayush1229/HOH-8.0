@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StickyNavbar } from "./components/Navbar";
+import { StickyNavbar, DevfolioButton } from "./components/Navbar";
 import Footer from "./components/Footer";
 import TextType from "./components/TypeText";
 import Timeline from "./components/Timeline";
@@ -113,8 +113,9 @@ function App() {
               intelligent agents, and the future of human-AI collaboration.
             </p>
             <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
-              <a href="#about" className="px-8 py-3.5 rounded-full text-sm font-bold hover:opacity-85 transition-opacity"
-                style={{ background: "#00e5ff", color: "#000" }}>Register Now</a>
+              <div className="flex items-center justify-center">
+                <DevfolioButton />
+              </div>
               <a href="#prizes" className="px-8 py-3.5 rounded-full text-sm font-bold border text-white hover:border-white/60 transition-colors"
                 style={{ borderColor: "rgba(255,255,255,0.28)" }}>View Tracks</a>
             </div>

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import logo from "../assets/logo.webp";
 
-const HACKATHON_SLUG = "YOUR-HACKATHON-SLUG";
+const HACKATHON_SLUG = "hackonhills8";
 
-function DevfolioButton() {
+export function DevfolioButton() {
   useEffect(() => {
     if (!document.querySelector('script[src="https://apply.devfolio.co/v2/sdk.js"]')) {
       const script = document.createElement("script");
@@ -76,13 +76,9 @@ export function StickyNavbar() {
         </nav>
 
         {/* Register button */}
-        <a
-          href="#about"
-          className="hidden lg:inline-flex items-center px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-200 hover:opacity-85 shrink-0"
-          style={{ background: "#00e5ff", color: "#000" }}
-        >
-          Register
-        </a>
+        <div className="hidden lg:block shrink-0" style={{ transform: "scale(0.85)", transformOrigin: "right center" }}>
+          <DevfolioButton />
+        </div>
 
         {/* Mobile hamburger */}
         <button
@@ -123,14 +119,11 @@ export function StickyNavbar() {
                 {item}
               </a>
             ))}
-            <a
-              href="#about"
-              className="mt-2 flex items-center justify-center px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest"
-              style={{ background: "#00e5ff", color: "#000" }}
-              onClick={() => setOpenNav(false)}
-            >
-              Register
-            </a>
+            <div className="mt-2 flex justify-center" onClick={() => setOpenNav(false)}>
+              <div style={{ transform: "scale(0.85)" }}>
+                <DevfolioButton />
+              </div>
+            </div>
           </div>
         </div>
       )}
