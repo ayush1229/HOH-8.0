@@ -96,7 +96,7 @@ function PrizePool() {
               background-image: linear-gradient(
                 120deg,
                 #22c55e 25%,
-                #FFD700 50%,
+                #ffffff 50%,
                 #22c55e 75%
               );
               background-size: 200% auto;
