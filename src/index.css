@@ -7,6 +7,18 @@
   src: url('./assets/fonts/SpaceGrotesk-Regular.ttf') format('truetype');
 }
 
+/* Acorn Nostalgia Mono — terminal screen font */
+@font-face {
+  font-family: 'AcornNostalgiaMono';
+  src: url('./assets/fonts/acorn-nostalgia-mono.otf.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-nostalgia {
+  font-family: 'AcornNostalgiaMono', 'JetBrains Mono', monospace;
+}
+
 :root {
   --bg: #020204;
   --surface: #0a0a10;

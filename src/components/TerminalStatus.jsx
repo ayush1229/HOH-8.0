@@ -68,11 +68,11 @@ export default function TerminalStatus() {
     /* Exact same container as the original static screen */
     <div className="bg-zinc-900/70 border border-white/10 rounded-2xl p-10 backdrop-blur-xl">
 
-      {/* header — same as original */}
-      <div className="font-mono text-sm text-zinc-400 mb-8">$ system.status --verbose</div>
+      {/* header */}
+      <div className="font-nostalgia text-sm text-zinc-400 mb-8">$ system.status --verbose</div>
 
       {/* lines — always render all 5 to keep height fixed */}
-      <div className="space-y-4 font-mono text-sm">
+      <div className="space-y-4 font-nostalgia text-sm">
         {LINES.map((line, idx) => {
           const isCompleted = done.includes(idx);
           const isCurrent   = !allDone && idx === lineIdx;
@@ -103,15 +103,15 @@ export default function TerminalStatus() {
         })}
       </div>
 
-      {/* footer — same as original */}
+      {/* footer */}
       <div className="mt-8 pt-8 border-t border-white/10">
-        <div className="flex items-center justify-between text-xs text-zinc-400 font-mono">
+        <div className="flex items-center justify-between text-xs text-zinc-400 font-nostalgia">
           <span>System Status</span>
 
           {allDone ? (
             <span
               className="text-green-400 font-bold"
-              style={{ textShadow: '0 0 8px #4ade80, 0 0 20px #4ade8055' }}
+              style={{ textShadow: '0 0 4px #4ade8088' }}
             >
               All Systems Operational
             </span>
