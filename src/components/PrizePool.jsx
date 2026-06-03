@@ -109,49 +109,78 @@ function PrizePool() {
               display: inline-block;
             }
           `}</style>
-          {[first, second, third].map((prize, i) =>
-            prize ? (
+          {[first, second, third].map((prize, i) => {
+            if (!prize) return null;
+            
+            const getCardStyle = (index) => {
+              switch (index) {
+                case 0: // Gold
+                  return {
+                    bg: "linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.05) 100%)",
+                    border: "1px solid rgba(255, 215, 0, 0.4)",
+                    shadow: "0 8px 32px rgba(255, 215, 0, 0.15)",
+                    textColor: "#FFD700",
+                    gradient: "from-[#FFD700] via-[#FDB931] to-[#FFF8DC]"
+                  };
+                case 1: // Silver
+                  return {
+                    bg: "linear-gradient(135deg, rgba(192, 192, 192, 0.2) 0%, rgba(192, 192, 192, 0.05) 100%)",
+                    border: "1px solid rgba(192, 192, 192, 0.4)",
+                    shadow: "0 8px 32px rgba(192, 192, 192, 0.15)",
+                    textColor: "#C0C0C0",
+                    gradient: "from-[#C0C0C0] via-[#E8E8E8] to-[#FFFFFF]"
+                  };
+                case 2: // Bronze
+                  return {
+                    bg: "linear-gradient(135deg, rgba(205, 127, 50, 0.2) 0%, rgba(205, 127, 50, 0.05) 100%)",
+                    border: "1px solid rgba(205, 127, 50, 0.4)",
+                    shadow: "0 8px 32px rgba(205, 127, 50, 0.15)",
+                    textColor: "#CD7F32",
+                    gradient: "from-[#CD7F32] via-[#E4A05F] to-[#F3D5B5]"
+                  };
+                default:
+                  return {};
+              }
+            };
+
+            const style = getCardStyle(i);
+
+            return (
               <div
                 key={i}
                 data-fade-step
                 style={{
                   transitionDelay: `${i * 0.15}s`,
-                  background: i === 0 ? "rgba(192,192,192,0.04)" : "#0d0d0d",
-                  border:
-                    i === 0
-                      ? `1px solid rgba(192,192,192,0.35)`
-                      : "1px solid rgba(255,255,255,0.08)",
-                  boxShadow: i === 0 ? `0 0 40px rgba(192,192,192,0.07)` : "none",
+                  background: style.bg,
+                  border: style.border,
+                  boxShadow: style.shadow,
                 }}
-                className="flex flex-col px-6 py-8 text-center rounded-sm transition-transform hover:-translate-y-2 duration-300 relative overflow-hidden"
+                className="flex flex-col px-6 py-8 text-center rounded-xl transition-transform hover:-translate-y-2 duration-300 relative overflow-hidden backdrop-blur-md"
               >
-                {/* Shining Loop for First Place */}
-                {i === 0 && (
-                  <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-[#c0c0c0] to-transparent opacity-10 prize-shine-loop" style={{ animation: "prizeShine 4s infinite linear pointer-events: none;" }}></div>
-                )}
+                {/* Shining Loop */}
+                <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-10 prize-shine-loop" style={{ animation: "prizeShine 4s infinite linear", pointerEvents: "none" }}></div>
+                
                 {/* Dot accent */}
-                {i === 0 && (
-                  <span
-                    className="w-1.5 h-1.5 rounded-full mx-auto mb-5 relative z-10"
-                    style={{ background: SILVER }}
-                  />
-                )}
+                <span
+                  className="w-1.5 h-1.5 rounded-full mx-auto mb-5 relative z-10"
+                  style={{ background: style.textColor, boxShadow: `0 0 10px ${style.textColor}` }}
+                />
+                
                 <p
-                  className={`text-[9px] font-semibold uppercase tracking-[0.28em] mb-5 ${gradientClass} relative z-10`}
+                  className={`text-[10px] font-semibold uppercase tracking-[0.28em] mb-5 bg-gradient-to-r ${style.gradient} bg-clip-text text-transparent inline-block relative z-10`}
                 >
                   {prize.position}
                 </p>
                 <p
-                  className={`text-3xl sm:text-4xl font-bold mb-4 relative z-10 ${
-                    i === 0 ? "text-[#c0c0c0]" : "text-white"
-                  }`}
+                  className="text-4xl sm:text-5xl font-bold mb-4 relative z-10"
+                  style={{ color: style.textColor, textShadow: `0 0 20px ${style.textColor}40` }}
                 >
                   {prize.amount}
                 </p>
-                <p className="text-xs text-white/35 leading-relaxed relative z-10">{prize.description}</p>
+                <p className="text-sm text-white/80 leading-relaxed relative z-10 font-medium">{prize.description}</p>
               </div>
-            ) : null
-          )}
+            );
+          })}
         </div>
 
         {/* Divider + Special Awards label */}
