@@ -1,4 +1,5 @@
 import React from "react";
+import TerminalStatus from "./TerminalStatus";
 
 function SectionLabel({ children }) {
   return (
@@ -44,41 +45,8 @@ function About() {
 
                 <div className="relative reveal">
                     <div className="absolute -inset-10 bg-white/5 rounded-3xl blur-3xl"></div>
-                    <div className="relative bg-zinc-900/70 border border-white/10 rounded-2xl p-10 backdrop-blur-xl">
-                        <div className="font-mono text-sm text-zinc-400 mb-8">$ system.status --verbose</div>
-                        <div className="space-y-4 font-mono text-sm">
-                            <div className="flex items-center gap-4">
-                                <span className="text-green-500 font-bold">[OK]</span>
-                                <span className="text-zinc-400">Autonomous agents deployed</span>
-                                <span className="text-zinc-500 ml-auto">v2.4.1</span>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <span className="text-green-500 font-bold">[OK]</span>
-                                <span className="text-zinc-400">Decentralized intelligence active</span>
-                                <span className="text-zinc-500 ml-auto">v1.8.0</span>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <span className="text-green-500 font-bold">[OK]</span>
-                                <span className="text-zinc-400">Multi-agent orchestration ready</span>
-                                <span className="text-zinc-500 ml-auto">v3.0.2</span>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <span className="text-green-500 font-bold">[OK]</span>
-                                <span className="text-zinc-400">Agentic frameworks loaded</span>
-                                <span className="text-zinc-500 ml-auto">v4.1.0</span>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <span className="text-green-500 font-bold">[OK]</span>
-                                <span className="text-zinc-400">Collaboration protocols initialized</span>
-                                <span className="text-zinc-500 ml-auto">v1.2.5</span>
-                            </div>
-                        </div>
-                        <div className="mt-8 pt-8 border-t border-white/10">
-                            <div className="flex items-center justify-between text-xs text-zinc-400 font-mono">
-                                <span>System Status</span>
-                                <span className="text-green-400 font-bold">All Systems Operational</span>
-                            </div>
-                        </div>
+                    <div className="relative">
+                        <TerminalStatus />
                     </div>
                 </div>
             </div>
