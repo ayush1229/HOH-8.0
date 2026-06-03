@@ -71,57 +71,60 @@ export default function TerminalStatus() {
       {/* header */}
       <div className="font-nostalgia text-sm text-zinc-400 mb-8">$ system.status --verbose</div>
 
-      {/* Lines — full text is ALWAYS in the DOM so height never changes.
-          Typing is just a color transition: chars flip transparent → visible. */}
-      <div className="space-y-4 font-nostalgia text-sm">
+      {/* Lines — each row uses CSS grid overlap.
+          The invisible ghost row sets the permanent height & width.
+          The animated row sits on top — no reflow ever. */}
+      <div className="space-y-4 font-nostalgia text-sm flex-1">
         {LINES.map((line, idx) => {
           const revealed = revealedChars[idx];
           const ok       = showOk[idx];
 
           return (
-            <div key={idx} className="flex items-start gap-4" style={{ opacity: revealed > 0 || ok ? 1 : 0 }}>
+            <div
+              key={idx}
+              className="grid"
+              style={{ opacity: revealed > 0 || ok ? 1 : 0 }}
+            >
+              {/* ── Ghost row: always full-width, invisible, locks dimensions ── */}
+              <div className="col-start-1 row-start-1 flex items-start gap-4 invisible pointer-events-none select-none">
+                <span className="font-bold shrink-0">[OK]</span>
+                <span className="flex-1 min-w-0">{line.text}</span>
+                <span className="text-zinc-500 shrink-0">{line.version}</span>
+              </div>
 
-              {/* [OK] badge */}
-              <span
-                className="font-bold shrink-0 transition-all duration-200"
-                style={{
-                  color:      ok ? '#22c55e' : 'transparent',
-                  textShadow: ok ? '0 0 6px #22c55e' : 'none',
-                }}
-              >
-                [OK]
-              </span>
+              {/* ── Live row: overlays the ghost, never changes character count ── */}
+              <div className="col-start-1 row-start-1 flex items-start gap-4">
+                {/* [OK] badge */}
+                <span
+                  className="font-bold shrink-0 transition-all duration-200"
+                  style={{
+                    color:      ok ? '#22c55e' : 'transparent',
+                    textShadow: ok ? '0 0 6px #22c55e' : 'none',
+                  }}
+                >
+                  [OK]
+                </span>
 
-              {/* Full text always rendered — chars beyond 'revealed' are just invisible */}
-              <span className="text-zinc-400 flex-1 min-w-0 break-words leading-relaxed">
-                {line.text.split('').map((ch, ci) => {
-                  let displayChar = ch;
-                  let color = 'transparent';
-                  let spanClass = '';
-
-                  if (ci < revealed) {
-                    color = undefined;
-                  } else if (ci === revealed && !ok && revealed > 0) {
-                    displayChar = '_';
-                    color = '#71717a';
-                    spanClass = 'animate-pulse';
-                  }
-
-                  return (
-                    <span key={ci} className={spanClass} style={{ color }}>
-                      {displayChar}
+                {/* Text: every character always rendered, just color-revealed */}
+                <span className="text-zinc-400 flex-1 min-w-0">
+                  {line.text.split('').map((ch, ci) => (
+                    <span
+                      key={ci}
+                      style={{ color: ci < revealed ? undefined : 'transparent' }}
+                    >
+                      {ch}
                     </span>
-                  );
-                })}
-              </span>
+                  ))}
+                </span>
 
-              {/* version number */}
-              <span
-                className="text-zinc-500 shrink-0 transition-opacity duration-200"
-                style={{ opacity: ok ? 1 : 0 }}
-              >
-                {line.version}
-              </span>
+                {/* Version */}
+                <span
+                  className="text-zinc-500 shrink-0 transition-opacity duration-200"
+                  style={{ opacity: ok ? 1 : 0 }}
+                >
+                  {line.version}
+                </span>
+              </div>
             </div>
           );
         })}
