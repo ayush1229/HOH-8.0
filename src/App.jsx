@@ -49,7 +49,7 @@ function App() {
       {/* Navbar */}
       <div className="relative z-50"><StickyNavbar /></div>
 
-      <main className="relative z-10 h-screen overflow-y-auto scroll-smooth no-scrollbar noise"
+      <main className="relative z-10 h-screen overflow-y-auto overflow-x-hidden scroll-smooth no-scrollbar noise"
         style={{ fontFamily: "'Inter', sans-serif" }}>
 
         <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", background: "rgba(2,2,4,0.08)", pointerEvents: "none", zIndex: 5 }}></div>
