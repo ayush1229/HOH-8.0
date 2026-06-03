@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import prizeData from '../data/prizepool.json';
 
-const CYAN = '#00e5ff';
-const GRADIENT = `linear-gradient(to right, ${CYAN} 0%, ${CYAN} 60%, #ffffff 100%)`;
+const SILVER = '#c0c0c0';
+const GRADIENT = `linear-gradient(to right, ${SILVER} 0%, ${SILVER} 60%, #ffffff 100%)`;
 
-const gradientClass = "bg-gradient-to-r from-[#00e5ff] from-0% via-[#00e5ff] via-60% to-white to-100% bg-clip-text text-transparent inline-block";
+const gradientClass = "bg-gradient-to-r from-[#c0c0c0] from-0% via-[#c0c0c0] via-60% to-white to-100% bg-clip-text text-transparent inline-block";
 
 function PrizePool() {
   const prizePool = prizeData?.prizePool ?? {};
@@ -69,8 +69,8 @@ function PrizePool() {
 
         {/* Total prize pool */}
         <div className="flex flex-col items-center justify-center text-center pt-24 pb-16">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#00e5ff] mb-6">
-            HACK ON HILLS 7.0
+          <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#c0c0c0] mb-6">
+            HACK ON HILLS 8.0
           </p>
           <p
             className="text-[10px] font-semibold uppercase tracking-[0.32em] mb-5"
@@ -95,10 +95,10 @@ function PrizePool() {
             .prize-shine {
               background-image: linear-gradient(
                 120deg,
-                #00e5ff 35%,
+                #c0c0c0 35%,
                 #ffffff 45%,
                 #ffffff 55%,
-                #00e5ff 65%
+                #c0c0c0 65%
               );
               background-size: 200% auto;
               animation: prizeShine 8s ease-in-out infinite alternate;
@@ -116,35 +116,39 @@ function PrizePool() {
                 data-fade-step
                 style={{
                   transitionDelay: `${i * 0.15}s`,
-                  background: i === 0 ? "rgba(0,229,255,0.04)" : "#0d0d0d",
+                  background: i === 0 ? "rgba(192,192,192,0.04)" : "#0d0d0d",
                   border:
                     i === 0
-                      ? `1px solid rgba(0,229,255,0.35)`
+                      ? `1px solid rgba(192,192,192,0.35)`
                       : "1px solid rgba(255,255,255,0.08)",
-                  boxShadow: i === 0 ? `0 0 40px rgba(0,229,255,0.07)` : "none",
+                  boxShadow: i === 0 ? `0 0 40px rgba(192,192,192,0.07)` : "none",
                 }}
-                className="flex flex-col px-6 py-8 text-center rounded-sm transition-transform hover:-translate-y-2 duration-300"
+                className="flex flex-col px-6 py-8 text-center rounded-sm transition-transform hover:-translate-y-2 duration-300 relative overflow-hidden"
               >
+                {/* Shining Loop for First Place */}
+                {i === 0 && (
+                  <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-[#c0c0c0] to-transparent opacity-10 prize-shine-loop" style={{ animation: "prizeShine 4s infinite linear pointer-events: none;" }}></div>
+                )}
                 {/* Dot accent */}
                 {i === 0 && (
                   <span
-                    className="w-1.5 h-1.5 rounded-full mx-auto mb-5"
-                    style={{ background: CYAN }}
+                    className="w-1.5 h-1.5 rounded-full mx-auto mb-5 relative z-10"
+                    style={{ background: SILVER }}
                   />
                 )}
                 <p
-                  className={`text-[9px] font-semibold uppercase tracking-[0.28em] mb-5 ${gradientClass}`}
+                  className={`text-[9px] font-semibold uppercase tracking-[0.28em] mb-5 ${gradientClass} relative z-10`}
                 >
                   {prize.position}
                 </p>
                 <p
-                  className={`text-3xl sm:text-4xl font-bold mb-4 ${
-                    i === 0 ? "text-[#00e5ff]" : "text-white"
+                  className={`text-3xl sm:text-4xl font-bold mb-4 relative z-10 ${
+                    i === 0 ? "text-[#c0c0c0]" : "text-white"
                   }`}
                 >
                   {prize.amount}
                 </p>
-                <p className="text-xs text-white/35 leading-relaxed">{prize.description}</p>
+                <p className="text-xs text-white/35 leading-relaxed relative z-10">{prize.description}</p>
               </div>
             ) : null
           )}
@@ -152,7 +156,7 @@ function PrizePool() {
 
         {/* Divider + Special Awards label */}
         <div className="flex items-center gap-4 mb-8">
-          <div className="w-6 h-px" style={{ background: CYAN }} />
+          <div className="w-6 h-px" style={{ background: SILVER }} />
           <span
             className="text-[10px] font-semibold uppercase tracking-[0.28em]"
             style={{ color: "rgba(255,255,255,0.45)" }}
@@ -172,10 +176,10 @@ function PrizePool() {
                 background: "#0d0d0d",
                 border: "1px solid rgba(255,255,255,0.08)",
               }}
-              className="flex flex-col items-center text-center px-4 py-5 rounded-sm transition-colors hover:border-[#00e5ff]/30 duration-300"
+              className="flex flex-col items-center text-center px-4 py-5 rounded-sm transition-colors hover:border-[#c0c0c0]/30 duration-300"
             >
               <p className="text-[11px] text-white/60 mb-2 leading-snug">{award.category}</p>
-              <p className="text-sm font-bold text-[#00e5ff]">
+              <p className="text-sm font-bold text-[#c0c0c0]">
                 {award.amount}
               </p>
             </div>
