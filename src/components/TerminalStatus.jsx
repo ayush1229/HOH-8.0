@@ -66,7 +66,7 @@ export default function TerminalStatus() {
   }, []);
 
   return (
-    <div className="bg-zinc-900/70 border border-white/10 rounded-2xl p-10 backdrop-blur-xl">
+    <div className="bg-zinc-900/70 border border-white/10 rounded-2xl p-6 sm:p-10 backdrop-blur-xl min-h-[460px] flex flex-col justify-between">
 
       {/* header */}
       <div className="font-nostalgia text-sm text-zinc-400 mb-8">$ system.status --verbose</div>
@@ -129,20 +129,33 @@ export default function TerminalStatus() {
 
       {/* footer */}
       <div className="mt-8 pt-8 border-t border-white/10">
-        <div className="flex items-center justify-between flex-wrap gap-2 text-xs text-zinc-400 font-nostalgia">
-          <span className="shrink-0">System Status</span>
-          {allDone ? (
-            <span
-              className="text-green-400 font-bold shrink-0"
-              style={{ textShadow: '0 0 4px #4ade8088' }}
-            >
+        <div className="flex items-center justify-between flex-wrap gap-2 text-xs font-nostalgia">
+          <span className="text-zinc-400 shrink-0">System Status</span>
+          
+          <div className="grid">
+            {/* Invisible placeholder for maximum width and height */}
+            <span className="col-start-1 row-start-1 invisible font-bold pointer-events-none">
               All Systems Operational
             </span>
-          ) : (
-            <span className="text-yellow-400 shrink-0">
-              Initializing System<span className="loading-dots" />
+            
+            {/* Success state */}
+            <span
+              className={`col-start-1 row-start-1 flex items-center justify-end transition-opacity duration-300 ${allDone ? 'opacity-100' : 'opacity-0'}`}
+            >
+              <span className="text-green-400 font-bold" style={{ textShadow: '0 0 4px #4ade8088' }}>
+                All Systems Operational
+              </span>
             </span>
-          )}
+            
+            {/* Loading state */}
+            <span
+              className={`col-start-1 row-start-1 flex items-center justify-end transition-opacity duration-300 ${!allDone ? 'opacity-100' : 'opacity-0'}`}
+            >
+              <span className="text-yellow-400 shrink-0">
+                Initializing System<span className="loading-dots" />
+              </span>
+            </span>
+          </div>
         </div>
       </div>
     </div>
