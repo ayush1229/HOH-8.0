@@ -67,13 +67,13 @@ function Hero() {
 
       <FloatingAgents mouseStrength={10} />
 
-      <div className="relative z-10 w-full px-6 flex flex-col items-center justify-center text-center max-w-6xl mx-auto h-full my-auto">
-        <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-black tracking-tighter mb-3 pt-16 reveal text-readable active flex flex-col items-center w-full" style={{ transitionDelay: '0.1s' }}>
+      <div className="relative z-10 w-full px-6 flex flex-col items-center justify-center text-center max-w-6xl mx-auto h-full my-auto pointer-events-none">
+        <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-black tracking-tighter mb-3 pt-16 reveal text-readable active flex flex-col items-center w-full pointer-events-auto" style={{ transitionDelay: '0.1s' }}>
             <span className="block glow-text w-full text-center leading-tight">HACK ON</span>
             <span className="block text-zinc-500 w-full text-center leading-tight">HILLS <span className="text-white">8.0</span></span>
         </h1>
 
-        <div className="h-6 mb-4 reveal active w-full flex justify-center" style={{ transitionDelay: '0.2s' }}>
+        <div className="h-6 mb-4 reveal active w-full flex justify-center pointer-events-auto" style={{ transitionDelay: '0.2s' }}>
             <TextType
               text={["The Age of Autonomous Agents", "Where AI Acts, Not Just Assists", "Decentralized Intelligence"]}
               className="text-base md:text-lg text-zinc-300 font-mono text-center"
@@ -82,11 +82,11 @@ function Hero() {
             />
         </div>
 
-        <p className="text-zinc-400 max-w-2xl mx-auto mb-8 text-sm md:text-base reveal active text-center" style={{ transitionDelay: '0.3s' }}>
+        <p className="text-zinc-400 max-w-2xl mx-auto mb-8 text-sm md:text-base reveal active text-center pointer-events-auto" style={{ transitionDelay: '0.3s' }}>
             Join the vanguard of decentralised intelligence. Build the future where AI does not just assist, it acts.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 reveal active w-full" style={{ transitionDelay: '0.4s' }}>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 reveal active w-full pointer-events-auto" style={{ transitionDelay: '0.4s' }}>
             <a href="#register" className="btn-primary px-8 py-3 rounded-xl text-sm font-semibold inline-flex items-center gap-3 font-mono magnetic">
                 <span>Register on Devfolio</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
@@ -97,9 +97,11 @@ function Hero() {
             </a>
         </div>
 
-        <Countdown />
+        <div className="pointer-events-auto w-full max-w-xl">
+            <Countdown />
+        </div>
 
-        <div className="mt-6 text-[10px] md:text-xs text-zinc-500 font-mono reveal active text-center w-full" style={{ transitionDelay: '0.6s' }}>
+        <div className="mt-6 text-[10px] md:text-xs text-zinc-500 font-mono reveal active text-center w-full pointer-events-auto" style={{ transitionDelay: '0.6s' }}>
             NIT HAMIRPUR // 48-HOUR HACKATHON // AGENTIC AI
         </div>
       </div>

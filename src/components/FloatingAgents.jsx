@@ -5,7 +5,7 @@ export default function FloatingAgents({
   agents = [
     {
       type: "agent",
-      name: "GPT Agent",
+      name: "Codex",
       status: "Processing query...",
       color: "#10b981",
       x: "12%",
