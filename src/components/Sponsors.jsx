@@ -16,8 +16,8 @@ function Sponsors() {
     <section id="sponsors" data-fade className="py-24 px-4 sm:px-6 lg:px-10 relative">
       <div className="mx-auto max-w-[1100px] flex flex-col items-center">
         <CenteredLabel>PARTNERS</CenteredLabel>
-        <p className="text-center text-[11px] font-semibold uppercase tracking-[0.32em] text-[#c0c0c0] mb-6">
-          HACK ON HILLS 7.0
+        <p className="text-center text-[25px] font-semibold uppercase tracking-[0.32em] text-[#c0c0c0] mb-6">
+          OUR PREVIOUS SPONSORS
         </p>
         <h2 className="text-center text-4xl sm:text-5xl md:text-6xl font-bold font-display text-white mb-4">
           Powering The <span className="text-zinc-400">Future</span>

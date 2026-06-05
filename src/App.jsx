@@ -79,7 +79,7 @@ function App() {
         <div className="divider"></div>
         
         <section id="timeline" data-fade className="px-4 sm:px-6 lg:px-10">
-          <Timeline />
+          {/* <Timeline /> */}
         </section>
         <div className="divider"></div>
         
