@@ -8,4 +8,13 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  build: {
+    minify: 'oxc',
+  },
+  oxc: {
+    // Strip all console.* and debugger statements from production bundle
+    transform: {
+      drop: ['console', 'debugger'],
+    },
+  },
 })
