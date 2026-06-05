@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../assets/logo.webp";
 
 const HACKATHON_SLUG = "hackonhills8";
