@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TextType from "./TypeText";
 import FloatingAgents from "./FloatingAgents";
+import { DevfolioButton } from "./Navbar";
 
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00", seconds: "00" });
@@ -87,10 +88,8 @@ function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 reveal active w-full pointer-events-auto" style={{ transitionDelay: '0.4s' }}>
-            <a href="#register" className="btn-primary px-8 py-3 rounded-xl text-sm font-semibold inline-flex items-center gap-3 font-mono magnetic">
-                <span>Register on Devfolio</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </a>
+            {/* Official Apply with Devfolio button */}
+            <DevfolioButton />
             <a href="#tracks" className="btn-outline px-8 py-3 rounded-xl text-sm font-semibold text-zinc-500 inline-flex items-center gap-3 font-mono magnetic">
                 <span>Explore Tracks</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>

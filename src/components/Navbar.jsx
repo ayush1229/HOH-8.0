@@ -1,19 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import logo from "../assets/logo.webp";
 
 const HACKATHON_SLUG = "hackonhills8";
 
+// SDK is loaded globally in index.html — no dynamic injection needed
 export function DevfolioButton() {
-  useEffect(() => {
-    if (!document.querySelector('script[src="https://apply.devfolio.co/v2/sdk.js"]')) {
-      const script = document.createElement("script");
-      script.src = "https://apply.devfolio.co/v2/sdk.js";
-      script.async = true;
-      script.defer = true;
-      document.body.appendChild(script);
-    }
-  }, []);
-
   return (
     <div
       className="apply-button"

@@ -1,4 +1,5 @@
 import React from "react";
+import { DevfolioButton } from "./Navbar";
 
 function CenteredLabel({ children }) {
   return (
@@ -24,10 +25,8 @@ function Register() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-                    <a href="https://devfolio.co" target="_blank" rel="noreferrer" className="btn-primary px-12 py-6 rounded-2xl text-xl font-semibold inline-flex items-center gap-4 font-mono magnetic">
-                        <span>Register Now</span>
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                    </a>
+                    {/* Official Apply with Devfolio button */}
+                    <DevfolioButton />
                     <a href="mailto:contact@hackonhills.com" className="btn-outline px-12 py-6 rounded-2xl text-xl font-semibold text-zinc-500 inline-flex items-center gap-4 font-mono magnetic">
                         <span>Contact Us</span>
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
