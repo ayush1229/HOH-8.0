@@ -37,6 +37,17 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
+  // Load Devfolio SDK after React renders so it finds all apply-button divs
+  useEffect(() => {
+    if (document.querySelector('script[data-devfolio-sdk]')) return;
+    const script = document.createElement("script");
+    script.src = "https://apply.devfolio.co/v2/sdk.js";
+    script.async = true;
+    script.defer = true;
+    script.setAttribute("data-devfolio-sdk", "true");
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <div ref={containerRef} className="relative h-screen w-screen overflow-hidden max-w-[100vw]"
       style={{ backgroundColor: "transparent", fontFamily: "'Inter', sans-serif" }}>
