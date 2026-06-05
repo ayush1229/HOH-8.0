@@ -12,11 +12,18 @@
       <a href="https://devfolio.co" target="_blank" rel="noopener noreferrer">
         <img src="/sponsors/images/devfolio_official.png" alt="DEVFOLIO LOGO" />
       </a>
+      <!-- Apply with Devfolio button: static HTML, SDK transforms this immediately -->
+      <div
+        class="apply-button"
+        data-hackathon-slug="hackonhills8"
+        data-button-theme="light"
+        style="height: 44px; width: 312px;"
+      ></div>
     </div>
 
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <!-- Devfolio Apply Button SDK -->
-    <script defer async src="https://apply.devfolio.co/v2/sdk.js"></script>
+    <!-- Devfolio Apply Button SDK: defer only (no async) so it runs after HTML is parsed and finds all apply-button divs -->
+    <script defer src="https://apply.devfolio.co/v2/sdk.js"></script>
   </body>
 </html>
