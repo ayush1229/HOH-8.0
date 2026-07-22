@@ -4,59 +4,13 @@
     "description": "HOH is made possible by the generous support of our sponsors",
     "categories": [
       {
-        "tier": "Title Sponsor",
-        "sponsors": [
-          {
-            "name": "algoquant",
-            "logo": "/sponsors/algoquant.jpg",
-            "image": "/sponsors/images/algoquantimg.webp",
-            "link": "https://algoquant.com"
-          }
-        ]
-      },
-      {
-        "tier": "Gold Sponsors",
-        "sponsors": [
-          {
-            "name": "github",
-            "logo": "/sponsors/github.jpg",
-            "image": "/sponsors/images/githubimg.webp",
-            "link": "https://github.com"
-          }
-        ]
-      },
-      {
         "tier": "Silver Sponsors",
         "sponsors": [
           {
-            "name": "DEVFOLIO LOGO",
-            "alt": "DEVFOLIO LOGO",
-            "logo": "/sponsors/images/devfolio_official.png",
-            "image": "/sponsors/images/devfolio_official.png",
+            "name": "Devfolio",
+            "logo": "/sponsors/images/devfolio_new.png",
+            "image": "/sponsors/images/devfolio_new.png",
             "link": "https://devfolio.co"
-          },
-          {
-            "name": "ETHIndia",
-            "logo": "/sponsors/ETHIndia.png",
-            "image": "/sponsors/images/ETHIndiaimg.webp",
-            "link": "https://ethindia.co"
-          },
-          {
-            "name": "APTOS",
-            "logo": "/sponsors/aptos.png",
-            "image": "/sponsors/images/aptosimg.webp",
-            "link": "https://aptoslabs.com"
-          }
-        ]
-      },
-      {
-        "tier": "Bronze Sponsors",
-        "sponsors": [
-          {
-            "name": "Endless Domains",
-            "logo": "/sponsors/endlessdomains_logo.jpg",
-            "image": "/sponsors/images/endlessdomainsimg.svg",
-            "link": "https://endlessdomains.io/"
           }
         ]
       },
@@ -64,10 +18,10 @@
         "tier": "Community Partner",
         "sponsors": [
           {
-            "name": "theDevArmy",
-            "logo": "/sponsors/thedevarmy.png",
-            "image": "/sponsors/images/thedevarmyimg.png",
-            "link": "https://thedevarmy.com"
+            "name": "Eventopia",
+            "logo": "/sponsors/Eventopia-Logo-13.png",
+            "image": "/sponsors/Eventopia-Logo-13.png",
+            "link": "https://eventopia.in/"
           }
         ]
       }
