@@ -1,0 +1,39 @@
+{
+  "sponsorsSection": {
+    "title": "Our Sponsors",
+    "description": "HOH is made possible by the generous support of our sponsors",
+    "categories": [
+      {
+        "tier": "Title Sponsor",
+        "sponsors": [
+        ]
+      },
+      {
+        "tier": "Gold Sponsors",
+        "sponsors": [
+        ]
+      },
+      {
+        "tier": "Silver Sponsors",
+        "sponsors": [
+        ]
+      },
+      {
+        "tier": "Bronze Sponsors",
+        "sponsors": [
+        ]
+      },
+      {
+        "tier": "Community Partner",
+        "sponsors": [
+          {
+            "name": "theDevArmy",
+            "logo": "/sponsors/thedevarmy.png",
+            "image": "/sponsors/images/thedevarmyimg.png",
+            "link": "https://thedevarmy.com"
+          }
+        ]
+      }
+    ]
+  }
+}
