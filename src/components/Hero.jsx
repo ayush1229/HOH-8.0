@@ -1,60 +1,6 @@
-import React, { useEffect, useState } from "react";
 import TextType from "./TypeText";
 import FloatingAgents from "./FloatingAgents";
 import { DevfolioButton } from "./Navbar";
-
-function Countdown() {
-  const [timeLeft, setTimeLeft] = useState({ days: "00", hours: "00", minutes: "00", seconds: "00" });
-
-  useEffect(() => {
-    const targetDate = new Date("2026-10-02T00:00:00").getTime();
-    
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-      
-      if (distance < 0) {
-        clearInterval(interval);
-        return;
-      }
-      
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      setTimeLeft({
-        days: days.toString().padStart(2, '0'),
-        hours: hours.toString().padStart(2, '0'),
-        minutes: minutes.toString().padStart(2, '0'),
-        seconds: seconds.toString().padStart(2, '0')
-      });
-    }, 1000);
-    
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="grid grid-cols-4 gap-3 sm:gap-5 w-full max-w-xl mx-auto reveal active mt-6" style={{ transitionDelay: '0.5s' }}>
-        <div className="bg-white/5 backdrop-blur-lg border border-white/5 p-3 sm:p-5 rounded-2xl flex flex-col items-center">
-            <div className="font-mono text-2xl sm:text-3xl md:text-4xl font-bold text-white">{timeLeft.days}</div>
-            <div className="text-[10px] sm:text-xs text-zinc-400 mt-1 sm:mt-2 uppercase font-mono">Days</div>
-        </div>
-        <div className="bg-white/5 backdrop-blur-lg border border-white/5 p-3 sm:p-5 rounded-2xl flex flex-col items-center">
-            <div className="font-mono text-2xl sm:text-3xl md:text-4xl font-bold text-white">{timeLeft.hours}</div>
-            <div className="text-[10px] sm:text-xs text-zinc-400 mt-1 sm:mt-2 uppercase font-mono">Hours</div>
-        </div>
-        <div className="bg-white/5 backdrop-blur-lg border border-white/5 p-3 sm:p-5 rounded-2xl flex flex-col items-center">
-            <div className="font-mono text-2xl sm:text-3xl md:text-4xl font-bold text-white">{timeLeft.minutes}</div>
-            <div className="text-[10px] sm:text-xs text-zinc-400 mt-1 sm:mt-2 uppercase font-mono">Mins</div>
-        </div>
-        <div className="bg-white/5 backdrop-blur-lg border border-white/5 p-3 sm:p-5 rounded-2xl flex flex-col items-center">
-            <div className="font-mono text-2xl sm:text-3xl md:text-4xl font-bold text-white">{timeLeft.seconds}</div>
-            <div className="text-[10px] sm:text-xs text-zinc-400 mt-1 sm:mt-2 uppercase font-mono">Secs</div>
-        </div>
-    </div>
-  );
-}
 
 function Hero() {
   return (
@@ -96,8 +42,8 @@ function Hero() {
             </a>
         </div>
 
-        <div className="pointer-events-auto w-full max-w-xl">
-            <Countdown />
+        <div className="w-full max-w-xl mx-auto reveal active mt-6 text-3xl sm:text-4xl md:text-5xl font-mono font-bold text-white" style={{ transitionDelay: '0.5s' }}>
+            Coming Soon<span className="loading-dots" aria-hidden="true"></span>
         </div>
 
         <div className="mt-6 text-[10px] md:text-xs text-zinc-500 font-mono reveal active text-center w-full pointer-events-auto" style={{ transitionDelay: '0.6s' }}>
