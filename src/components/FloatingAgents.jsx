@@ -153,24 +153,6 @@ export default function FloatingAgents({
           margin-top:2px;
         }
 
-        .loading-dots {
-          display: inline-block;
-          width: 12px;
-          text-align: left;
-        }
-
-        .loading-dots::after {
-          content: '';
-          animation: loadingDots 1.5s infinite;
-        }
-        
-        @keyframes loadingDots {
-          0% { content: ''; }
-          25% { content: '.'; }
-          50% { content: '..'; }
-          75% { content: '...'; }
-        }
-
         .code-card {
           color:#00e5ff;
           font-size:13px;
