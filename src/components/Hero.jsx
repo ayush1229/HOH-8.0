@@ -42,7 +42,7 @@ function Hero() {
         </div>
 
         <div className="w-full max-w-xl mx-auto reveal active mt-6 text-3xl sm:text-4xl md:text-5xl font-mono font-bold text-white" style={{ transitionDelay: '0.5s' }}>
-            Coming Soon<span className="loading-dots" aria-hidden="true"></span>
+            Postponed Till Further Notice
         </div>
 
         <div className="mt-6 text-[10px] md:text-xs text-zinc-500 font-mono reveal active text-center w-full pointer-events-auto" style={{ transitionDelay: '0.6s' }}>
