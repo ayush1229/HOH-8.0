@@ -1,6 +1,5 @@
 import TextType from "./TypeText";
 import FloatingAgents from "./FloatingAgents";
-import { DevfolioButton } from "./Navbar";
 
 function Hero() {
   return (
@@ -35,7 +34,7 @@ function Hero() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 reveal active w-full pointer-events-auto" style={{ transitionDelay: '0.4s' }}>
             {/* Official Apply with Devfolio button */}
-            <DevfolioButton />
+            {/* <DevfolioButton /> */}
             <a href="#tracks" className="btn-outline px-8 py-3 rounded-xl text-sm font-semibold text-zinc-500 inline-flex items-center gap-3 font-mono magnetic">
                 <span>Explore Tracks</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
